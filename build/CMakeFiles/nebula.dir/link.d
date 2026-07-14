@@ -9,9 +9,15 @@ nebula: \
   CMakeFiles/nebula.dir/cmdbuffer.c.o \
   CMakeFiles/nebula.dir/renderpass.c.o \
   CMakeFiles/nebula.dir/pipeline.c.o \
+  CMakeFiles/nebula.dir/descriptor.c.o \
   CMakeFiles/nebula.dir/main.c.o \
   /usr/lib64/libvulkan.so \
   /usr/lib64/libglfw.so.3.4 \
+  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
+  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
+  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
+  /lib64/libm.so.6 \
+  /lib64/libmvec.so.1 \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
@@ -45,7 +51,6 @@ nebula: \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o \
-  /usr/lib64/libm.so.6 \
   /lib64/ld-linux-x86-64.so.2
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o:
@@ -68,11 +73,23 @@ CMakeFiles/nebula.dir/renderpass.c.o:
 
 CMakeFiles/nebula.dir/pipeline.c.o:
 
+CMakeFiles/nebula.dir/descriptor.c.o:
+
 CMakeFiles/nebula.dir/main.c.o:
 
 /usr/lib64/libvulkan.so:
 
 /usr/lib64/libglfw.so.3.4:
+
+/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so:
+
+/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so:
+
+/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so:
+
+/lib64/libm.so.6:
+
+/lib64/libmvec.so.1:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
 
@@ -139,7 +156,5 @@ CMakeFiles/nebula.dir/main.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o:
-
-/usr/lib64/libm.so.6:
 
 /lib64/ld-linux-x86-64.so.2:

@@ -42,6 +42,104 @@ CMakeFiles/nebula.dir/main.c.o: /home/prashanth/Desktop/nebula/main.c \
  /home/prashanth/Desktop/nebula/present.h /usr/include/GLFW/glfw3.h \
  /usr/include/GL/gl.h /usr/include/GL/glext.h \
  /usr/include/KHR/khrplatform.h /home/prashanth/Desktop/nebula/buffer.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/cglm.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/common.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+ /usr/include/bits/types/clock_t.h /usr/include/bits/types/clockid_t.h \
+ /usr/include/bits/types/time_t.h /usr/include/bits/types/timer_t.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/endianness.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/uintn-identity.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/types/sigset_t.h \
+ /usr/include/bits/types/__sigset_t.h \
+ /usr/include/bits/types/struct_timeval.h \
+ /usr/include/bits/types/struct_timespec.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/thread-shared-types.h \
+ /usr/include/bits/pthreadtypes-arch.h \
+ /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
+ /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
+ /usr/include/bits/types/once_flag.h /usr/include/bits/stdlib-float.h \
+ /usr/include/math.h /usr/include/bits/math-vector.h \
+ /usr/include/bits/libm-simd-decl-stubs.h \
+ /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
+ /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
+ /usr/include/bits/mathcalls-helper-functions.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
+ /usr/include/bits/iscanonical.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/float.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/types.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/stdalign.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/intrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/xmmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/mmintrin.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/mm_malloc.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/emmintrin.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/x86.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/intrin.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec2.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/util.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec2-ext.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec3.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec4.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec4-ext.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec3-ext.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/ivec2.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/ivec3.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/ivec4.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat4.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/mat4.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/../../common.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/../intrin.h \
+ /usr/include/assert.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat4x2.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat4x3.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat3.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/mat3.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat3x2.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat3x4.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat2.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/mat2.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat2x3.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat2x4.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine-mat.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/affine.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine-pre.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine-post.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/cam.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/plane.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../common.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../plane.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../mat4.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/ortho_rh_no.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp_rh_no.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/view_rh_no.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/view_rh.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/frustum.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/quat.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/quat.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/euler.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/handed/euler_to_quat_rh.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/handed/../common.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/noise.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/aabb2d.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/box.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/color.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/io.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/project.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/project_no.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../vec3.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../vec4.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/sphere.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/ease.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/curve.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/bezier.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/ray.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine2d.h \
  /home/prashanth/Desktop/nebula/renderpass.h \
  /home/prashanth/Desktop/nebula/cmdbuffer.h \
- /home/prashanth/Desktop/nebula/pipeline.h
+ /home/prashanth/Desktop/nebula/pipeline.h \
+ /home/prashanth/Desktop/nebula/descriptor.h

@@ -6,6 +6,7 @@
 #include "renderpass.h"
 #include "present.h"
 #include "buffer.h"
+#include "descriptor.h"
 VkShaderModule vertex_shader_module;
 VkShaderModule fragment_shader_module;
 VkResult resultpipe;
@@ -55,7 +56,7 @@ bool creatingshadermodule()//like this is the storage of shader means spirv is s
 	size_t vertex_code_size;
 	size_t fragment_code_size;
 	//std::vector <unsigned char> vertex_source_code = readSPIRV("vertx2.spv");//i dont think i need a array cause i have only one vert
-	uint32_t* vertex_source_code = readSPIRV("vertex1.spv", &vertex_code_size);// i have not created anything though wait 
+	uint32_t* vertex_source_code = readSPIRV("vert.spvxxx", &vertex_code_size);// i have not created anything though wait 
 if (!vertex_source_code) {
     printf("failed to load vertex shader\n");
     return false;
@@ -241,8 +242,8 @@ bool creatingpipeline() {
 		VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 	pipe_lay_cre_info.pNext = NULL;
 	pipe_lay_cre_info.flags = 0;
-	pipe_lay_cre_info.setLayoutCount = 0;
-	pipe_lay_cre_info.pSetLayouts = NULL;
+	pipe_lay_cre_info.setLayoutCount = 1;
+	pipe_lay_cre_info.pSetLayouts = &descriptorsetlayout;
 	pipe_lay_cre_info
 		.pushConstantRangeCount = 0;
 	pipe_lay_cre_info

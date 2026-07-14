@@ -6,6 +6,7 @@
 #include "buffer.h"
 #include "renderpass.h"
 #include "pipeline.h"
+#include "descriptor.h"
 VkDeviceSize destination_offset;
 VkResult resultcmd = VK_SUCCESS;
 VkCommandPool command_pool;
@@ -212,6 +213,7 @@ bool creatingcommand()
 }
 bool renderloop()
 {
+    updatingubo();
     VkRect2D render_area = (VkRect2D){0, 0, 0, 0};
     render_area.offset = (VkOffset2D){0, 0};
     render_area.extent.height = size_of_images.height;
@@ -267,6 +269,7 @@ bool renderloop()
         &staging_dst_buffer,
         offsets0);
     vkCmdBindIndexBuffer(command_buffers[image_index], index_buffer, 0, VK_INDEX_TYPE_UINT32);
+    vkCmdBindDescriptorSets(command_buffers[image_index], VK_PIPELINE_BIND_POINT_GRAPHICS, pipe_layout, 0, 1, &descriptorsets[image_index], 0, NULL);
     vkCmdDrawIndexed(command_buffers[image_index], 6, 1, 0, 0, 0);    
 
 

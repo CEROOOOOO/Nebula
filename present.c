@@ -129,6 +129,7 @@ bool selectingnumberofswapchainimages()
 
         number_of_images = surface_capabilities.maxImageCount; // here its saying shut the fuck up  number_of_images you are instructed and should obey maximage count of yop
     }
+    //image count i am not bothered 
     return true;
 }
 bool choosingsizeofswapchainimages()

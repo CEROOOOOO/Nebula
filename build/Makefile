@@ -177,6 +177,30 @@ cmdbuffer.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/cmdbuffer.c.s
 .PHONY : cmdbuffer.c.s
 
+descriptor.o: descriptor.c.o
+.PHONY : descriptor.o
+
+# target to build an object file
+descriptor.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.c.o
+.PHONY : descriptor.c.o
+
+descriptor.i: descriptor.c.i
+.PHONY : descriptor.i
+
+# target to preprocess a source file
+descriptor.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.c.i
+.PHONY : descriptor.c.i
+
+descriptor.s: descriptor.c.s
+.PHONY : descriptor.s
+
+# target to generate assembly for a file
+descriptor.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.c.s
+.PHONY : descriptor.c.s
+
 device.o: device.c.o
 .PHONY : device.o
 
@@ -336,6 +360,9 @@ help:
 	@echo "... cmdbuffer.o"
 	@echo "... cmdbuffer.i"
 	@echo "... cmdbuffer.s"
+	@echo "... descriptor.o"
+	@echo "... descriptor.i"
+	@echo "... descriptor.s"
 	@echo "... device.o"
 	@echo "... device.i"
 	@echo "... device.s"

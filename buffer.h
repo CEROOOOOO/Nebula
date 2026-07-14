@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <vulkan/vulkan.h>
 #include <stdbool.h>
+#include <cglm/cglm.h>
 extern VkBuffer buffer;
 extern VkBuffer uniform_texel_buffer;
 extern VkBuffer storage_texel_buffer;
@@ -49,8 +50,17 @@ extern VkBufferCopy copyregion;
 bool copyingvertexbuffer();
 extern VkBuffer index_buffer;
 extern VkBuffer index_staging_buffer;
+extern VkBuffer* uniform_buffers; 
 extern VkBufferCopy index_copyregion;
 extern VkVertexInputBindingDescription* binding_descriptions;
 extern VkVertexInputAttributeDescription* attribute_descriptions;
 bool bufferbinding();
 bool freeingcmd(); 
+typedef struct
+{
+    mat4 model;
+    mat4 view;
+    mat4 proj;
+} ubox;
+bool updatingubo();
+void initstarttime();

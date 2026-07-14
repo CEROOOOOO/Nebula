@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/nebula.dir/buffer.c.o.d"
   "CMakeFiles/nebula.dir/cmdbuffer.c.o"
   "CMakeFiles/nebula.dir/cmdbuffer.c.o.d"
+  "CMakeFiles/nebula.dir/descriptor.c.o"
+  "CMakeFiles/nebula.dir/descriptor.c.o.d"
   "CMakeFiles/nebula.dir/device.c.o"
   "CMakeFiles/nebula.dir/device.c.o.d"
   "CMakeFiles/nebula.dir/instance.c.o"

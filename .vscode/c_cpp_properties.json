@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include"
+                "/usr/include",
+                "/home/prashanth/cglm/cglm-0.9.6/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

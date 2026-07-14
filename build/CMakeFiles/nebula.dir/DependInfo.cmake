@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/prashanth/Desktop/nebula/buffer.c" "CMakeFiles/nebula.dir/buffer.c.o" "gcc" "CMakeFiles/nebula.dir/buffer.c.o.d"
   "/home/prashanth/Desktop/nebula/cmdbuffer.c" "CMakeFiles/nebula.dir/cmdbuffer.c.o" "gcc" "CMakeFiles/nebula.dir/cmdbuffer.c.o.d"
+  "/home/prashanth/Desktop/nebula/descriptor.c" "CMakeFiles/nebula.dir/descriptor.c.o" "gcc" "CMakeFiles/nebula.dir/descriptor.c.o.d"
   "/home/prashanth/Desktop/nebula/device.c" "CMakeFiles/nebula.dir/device.c.o" "gcc" "CMakeFiles/nebula.dir/device.c.o.d"
   "/home/prashanth/Desktop/nebula/instance.c" "CMakeFiles/nebula.dir/instance.c.o" "gcc" "CMakeFiles/nebula.dir/instance.c.o.d"
   "/home/prashanth/Desktop/nebula/main.c" "CMakeFiles/nebula.dir/main.c.o" "gcc" "CMakeFiles/nebula.dir/main.c.o.d"

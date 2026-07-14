@@ -7,6 +7,7 @@
 #include "renderpass.h"
 #include "cmdbuffer.h"
 #include "pipeline.h"
+#include "descriptor.h"
 #include <GLFW/glfw3.h>
 
 VkResult result = VK_SUCCESS;
@@ -43,6 +44,9 @@ int main()
     if (bufferbinding())printf("fuck you 24.5\n");
     if (renderpassandframebuffer())printf("fuck you 24\n");
     if (creatingcommand())printf("fuck you 25\n");
+    if (setupdescriptorpool())printf("fuck you 25.2\n");
+    if (createDescriptorSetLayout())printf("fuck you 25.4\n");
+    if (setupdescriptorset())printf("fuck you 25.6");
     if (creatingshadermodule())printf("fuck you 26\n");
     if (specifyingpipelineshaderstages())printf("fuck you 27\n");
     if (vertexbinding())printf("fuck you 28\n");
@@ -52,6 +56,7 @@ int main()
     if (pipelinemultisamplestate())printf("fuck you 32\n");
     if (pipelineblendstate())printf("fuck you 33\n");
     if (creatingpipeline())printf("fuck you 34\n");
+    initstarttime();
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         acquiringswapchainimages();
@@ -66,6 +71,7 @@ int main()
     present_cleanup();
     device_cleanup(); 
     instance_cleanup();
+    descriptor_cleanup();
     //  if(creatingbufferview())std::cout<<"fuck you26\n";
       //JUST FORGET ABOUT IMAGE BUFFER LIKE I AM NIT RENDERING ANY TEXTURE YET SO WILL JUST USE BUFFER THATS IT
       //    //if(creatinganimage())std::cout<<"fuck you27\n";

@@ -13,3 +13,4 @@ bool pipelineblendstate();
 bool creatingpipeline();
 void pipeline_cleanup();
 extern VkPipeline pipe;
+extern VkPipelineLayout pipe_layout;
