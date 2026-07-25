@@ -7,6 +7,7 @@
 #include "renderpass.h"
 #include "pipeline.h"
 #include "descriptor.h"
+#include "objloader.h"
 VkDeviceSize destination_offset;
 VkResult resultcmd = VK_SUCCESS;
 VkCommandPool command_pool;
@@ -85,7 +86,7 @@ bool creatingcommand()
         return false;
     }
     vkCmdCopyBuffer(staging_command_buffer, staging_buffer, staging_dst_buffer, 1, &copyregion);       // copying done
-    vkCmdCopyBuffer(staging_command_buffer, index_staging_buffer, index_buffer, 1, &index_copyregion); //
+    vkCmdCopyBuffer(staging_command_buffer, index_staging_buffer, index_buffer, 1, &index_copyregion); // heree like from memcpy the index_staging_buffer is poopulated but with this function it goes tto index buffer
     vkEndCommandBuffer(staging_command_buffer);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,9 +219,9 @@ bool renderloop()
     render_area.offset = (VkOffset2D){0, 0};
     render_area.extent.height = size_of_images.height;
     render_area.extent.width = size_of_images.width;
-    VkClearValue clear_value = {};
-    clear_value.color = (VkClearColorValue){0.0f, 0.0f, 0.0f, 0.1f};
-    VkClearValue clear_values[] = {clear_value};
+    VkClearValue clear_values[2] = {};
+    clear_values[0].color = (VkClearColorValue){0.0f, 0.0f, 0.0f, 1.0f};
+    clear_values[1].depthStencil = (VkClearDepthStencilValue){1.0f, 0};
     VkSubpassContents subpass_contents = VK_SUBPASS_CONTENTS_INLINE;
     VkRenderPassBeginInfo render_pass_begin_info = {
         VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
@@ -228,7 +229,7 @@ bool renderloop()
         render_pass,                          // i will get it from render pass so wait
         swapchain_frame_buffers[image_index], // i will get it from render pass so wait
         render_area,
-        1,
+        2,
         clear_values};
     VkSubmitInfo submit_info;
     waitsemaphores = malloc(sizeof(VkSemaphore) * 1);
@@ -270,8 +271,7 @@ bool renderloop()
         offsets0);
     vkCmdBindIndexBuffer(command_buffers[image_index], index_buffer, 0, VK_INDEX_TYPE_UINT32);
     vkCmdBindDescriptorSets(command_buffers[image_index], VK_PIPELINE_BIND_POINT_GRAPHICS, pipe_layout, 0, 1, &descriptorsets[image_index], 0, NULL);
-    vkCmdDrawIndexed(command_buffers[image_index], 6, 1, 0, 0, 0);    
-
+    vkCmdDrawIndexed(command_buffers[image_index], indexcount, 1, 0, 0, 0);
 
     vkCmdEndRenderPass(command_buffers[image_index]); // idk wtf i did but i will come back when debugging after writing shaders or adfter pipeluine then bye---------------------------------------------------------
     vkEndCommandBuffer(command_buffers[image_index]);

@@ -10,9 +10,11 @@ nebula: \
   CMakeFiles/nebula.dir/renderpass.c.o \
   CMakeFiles/nebula.dir/pipeline.c.o \
   CMakeFiles/nebula.dir/descriptor.c.o \
+  CMakeFiles/nebula.dir/objloader.c.o \
   CMakeFiles/nebula.dir/main.c.o \
   /usr/lib64/libvulkan.so \
   /usr/lib64/libglfw.so.3.4 \
+  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libassimp.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
@@ -51,6 +53,11 @@ nebula: \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o \
+  /usr/lib64/libz.so.1 \
+  /usr/lib64/libpoly2tri.so.1.0 \
+  /usr/lib64/libpugixml.so.1 \
+  /lib64/libgcc_s.so.1 \
+  /usr/lib64/libstdc++.so.6 \
   /lib64/ld-linux-x86-64.so.2
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o:
@@ -75,11 +82,15 @@ CMakeFiles/nebula.dir/pipeline.c.o:
 
 CMakeFiles/nebula.dir/descriptor.c.o:
 
+CMakeFiles/nebula.dir/objloader.c.o:
+
 CMakeFiles/nebula.dir/main.c.o:
 
 /usr/lib64/libvulkan.so:
 
 /usr/lib64/libglfw.so.3.4:
+
+/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libassimp.so:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so:
 
@@ -156,5 +167,15 @@ CMakeFiles/nebula.dir/main.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o:
+
+/usr/lib64/libz.so.1:
+
+/usr/lib64/libpoly2tri.so.1.0:
+
+/usr/lib64/libpugixml.so.1:
+
+/lib64/libgcc_s.so.1:
+
+/usr/lib64/libstdc++.so.6:
 
 /lib64/ld-linux-x86-64.so.2:

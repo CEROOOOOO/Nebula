@@ -273,6 +273,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/main.c.s
 .PHONY : main.c.s
 
+objloader.o: objloader.c.o
+.PHONY : objloader.o
+
+# target to build an object file
+objloader.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.c.o
+.PHONY : objloader.c.o
+
+objloader.i: objloader.c.i
+.PHONY : objloader.i
+
+# target to preprocess a source file
+objloader.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.c.i
+.PHONY : objloader.c.i
+
+objloader.s: objloader.c.s
+.PHONY : objloader.s
+
+# target to generate assembly for a file
+objloader.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.c.s
+.PHONY : objloader.c.s
+
 pipeline.o: pipeline.c.o
 .PHONY : pipeline.o
 
@@ -372,6 +396,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... objloader.o"
+	@echo "... objloader.i"
+	@echo "... objloader.s"
 	@echo "... pipeline.o"
 	@echo "... pipeline.i"
 	@echo "... pipeline.s"

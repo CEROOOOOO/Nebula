@@ -116,10 +116,10 @@ CMakeFiles/nebula.dir/buffer.c.o: /home/prashanth/Desktop/nebula/buffer.c \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../common.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../plane.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../mat4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/ortho_rh_no.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp_rh_no.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/ortho_rh_zo.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp_rh_zo.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/view_rh_no.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/view_rh_zo.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/view_rh.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/frustum.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/quat.h \
@@ -133,7 +133,7 @@ CMakeFiles/nebula.dir/buffer.c.o: /home/prashanth/Desktop/nebula/buffer.c \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/color.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/io.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/project.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/project_no.h \
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/project_zo.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../vec3.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../vec4.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/sphere.h \
@@ -141,4 +141,6 @@ CMakeFiles/nebula.dir/buffer.c.o: /home/prashanth/Desktop/nebula/buffer.c \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/curve.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/bezier.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/ray.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine2d.h
+ /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine2d.h \
+ /home/prashanth/Desktop/nebula/objloader.h \
+ /home/prashanth/Desktop/nebula/vertex.h

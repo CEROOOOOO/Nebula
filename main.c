@@ -8,6 +8,7 @@
 #include "cmdbuffer.h"
 #include "pipeline.h"
 #include "descriptor.h"
+#include "objloader.h"
 #include <GLFW/glfw3.h>
 
 VkResult result = VK_SUCCESS;
@@ -23,7 +24,7 @@ int main()
     if (loadinglogicaldevice())printf("fuck you 5\n");
     if (gettingqueue())printf("fuck you 6\n");
     //                presentation                 //
-    if (presentingsurface())printf("fuck you 6.5");
+    if (presentingsurface())printf("fuck you 6.5\n");
     if (selectingqueuefamilythatsupportspresentationforgivensurface())printf("fuck you 7\n");
     if (selectingdesiredpresentationmode())printf("fuck you 8\n");
     if (capabilitiesofpresentationsurface())printf("fuck you 9\n");
@@ -36,17 +37,23 @@ int main()
     if (creatingswapchainimageviews())printf("fuck you 16\n");
     if (creatingsemaphoreimg())printf("fuck you 17\n");
     if (creatingfenceimg())printf("fuck you 18\n");
+    if (assimp())printf("fucking object\n");
+    if (datasetup())printf("fuck you s times\n");
     if (creatingcmdforstaging())printf("fuck you 19\n");
     if (creatingbuffer())printf("fuck you 20\n");
     if (allocatingandbindingmemory())printf("fuck you 21\n");
     if (stagingresources())printf("fuck you 22\n");
     if (copyingvertexbuffer())printf("fuck you 23\n");
     if (bufferbinding())printf("fuck you 24.5\n");
+    if (createtextureimage())printf("fuck you 24.55\n");
+    if (createdestinationimageview())printf("fuck you 24.7\n");
+    if (createdestinationimagesampler())printf("fuck you 24.9\n");
+    if (depthimage())printf("fuck you 23.99\n");
     if (renderpassandframebuffer())printf("fuck you 24\n");
     if (creatingcommand())printf("fuck you 25\n");
     if (setupdescriptorpool())printf("fuck you 25.2\n");
     if (createDescriptorSetLayout())printf("fuck you 25.4\n");
-    if (setupdescriptorset())printf("fuck you 25.6");
+    if (setupdescriptorset())printf("fuck you 25.6\n");
     if (creatingshadermodule())printf("fuck you 26\n");
     if (specifyingpipelineshaderstages())printf("fuck you 27\n");
     if (vertexbinding())printf("fuck you 28\n");
@@ -72,6 +79,7 @@ int main()
     device_cleanup(); 
     instance_cleanup();
     descriptor_cleanup();
+    obj_cleanup();
     //  if(creatingbufferview())std::cout<<"fuck you26\n";
       //JUST FORGET ABOUT IMAGE BUFFER LIKE I AM NIT RENDERING ANY TEXTURE YET SO WILL JUST USE BUFFER THATS IT
       //    //if(creatinganimage())std::cout<<"fuck you27\n";

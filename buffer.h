@@ -54,8 +54,19 @@ extern VkBuffer* uniform_buffers;
 extern VkBufferCopy index_copyregion;
 extern VkVertexInputBindingDescription* binding_descriptions;
 extern VkVertexInputAttributeDescription* attribute_descriptions;
+extern VkImageView image_destination_view;
+extern VkSampler image_destination_sampler;
+extern VkImageView depth_image_view;
+extern size_t indexCount;
 bool bufferbinding();
-bool freeingcmd(); 
+bool createtextureimage();
+bool createdestinationimageview();
+bool createdestinationimagesampler();
+bool freeingcmd();
+VkFormat findDepthFormat();
+VkFormat findsupportedformat(VkFormat *formats, VkImageTiling tiling, VkFormatFeatureFlags features, uint32_t formatscount); 
+bool depthimage();
+bool datasetup();
 typedef struct
 {
     mat4 model;

@@ -142,4 +142,6 @@ CMakeFiles/nebula.dir/main.c.o: /home/prashanth/Desktop/nebula/main.c \
  /home/prashanth/Desktop/nebula/renderpass.h \
  /home/prashanth/Desktop/nebula/cmdbuffer.h \
  /home/prashanth/Desktop/nebula/pipeline.h \
- /home/prashanth/Desktop/nebula/descriptor.h
+ /home/prashanth/Desktop/nebula/descriptor.h \
+ /home/prashanth/Desktop/nebula/objloader.h \
+ /home/prashanth/Desktop/nebula/vertex.h

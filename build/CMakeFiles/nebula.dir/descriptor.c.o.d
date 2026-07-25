@@ -137,4 +137,6 @@ CMakeFiles/nebula.dir/descriptor.c.o: \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine2d.h \
  /home/prashanth/Desktop/nebula/present.h /usr/include/GLFW/glfw3.h \
  /usr/include/GL/gl.h /usr/include/GL/glext.h \
- /usr/include/KHR/khrplatform.h
+ /usr/include/KHR/khrplatform.h /usr/include/string.h \
+ /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
+ /usr/include/strings.h

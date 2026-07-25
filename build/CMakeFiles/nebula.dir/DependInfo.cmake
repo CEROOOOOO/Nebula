@@ -14,6 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/prashanth/Desktop/nebula/device.c" "CMakeFiles/nebula.dir/device.c.o" "gcc" "CMakeFiles/nebula.dir/device.c.o.d"
   "/home/prashanth/Desktop/nebula/instance.c" "CMakeFiles/nebula.dir/instance.c.o" "gcc" "CMakeFiles/nebula.dir/instance.c.o.d"
   "/home/prashanth/Desktop/nebula/main.c" "CMakeFiles/nebula.dir/main.c.o" "gcc" "CMakeFiles/nebula.dir/main.c.o.d"
+  "/home/prashanth/Desktop/nebula/objloader.c" "CMakeFiles/nebula.dir/objloader.c.o" "gcc" "CMakeFiles/nebula.dir/objloader.c.o.d"
   "/home/prashanth/Desktop/nebula/pipeline.c" "CMakeFiles/nebula.dir/pipeline.c.o" "gcc" "CMakeFiles/nebula.dir/pipeline.c.o.d"
   "/home/prashanth/Desktop/nebula/present.c" "CMakeFiles/nebula.dir/present.c.o" "gcc" "CMakeFiles/nebula.dir/present.c.o.d"
   "/home/prashanth/Desktop/nebula/renderpass.c" "CMakeFiles/nebula.dir/renderpass.c.o" "gcc" "CMakeFiles/nebula.dir/renderpass.c.o.d"

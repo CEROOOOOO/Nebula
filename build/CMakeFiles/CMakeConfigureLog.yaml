@@ -1932,3 +1932,167 @@ events:
         - "/usr/pkg"
         - "/opt"
 ...
+
+---
+events:
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:5 (find_package)"
+    name: "assimp"
+    configs:
+      -
+        filename: "assimp.cps"
+        kind: "cps"
+      -
+        filename: "assimpConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "assimp-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "assimp"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/prashanth/Desktop/nebula/build/CMakeFiles/pkgRedirects/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/Desktop/nebula/build/CMakeFiles/pkgRedirects/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/Desktop/nebula/build/CMakeFiles/pkgRedirects/lib64/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/Desktop/nebula/build/CMakeFiles/pkgRedirects/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/Desktop/nebula/build/CMakeFiles/pkgRedirects/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/.local/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/.local/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/.local/lib64/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/.local/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/.local/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/lib64/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/prashanth/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib64/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/local/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/assimpConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/assimp-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/usr/lib64/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/lib/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/usr/share/cps/assimp.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "/usr/lib64/cmake/assimp-6.0/assimpConfig.cmake"
+      mode: "config"
+      version: "6.0.5"
+    search_context:
+      ENV{PATH}:
+        - "/home/prashanth/.local/bin"
+        - "/home/prashanth/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/usr/libexec/sdcc"
+        - "/usr/libexec/sdcc"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/usr"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+...

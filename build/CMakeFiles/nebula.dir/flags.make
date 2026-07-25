@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/prashanth/cglm/cglm-0.9.6/include
+C_INCLUDES = -I/home/prashanth/cglm/cglm-0.9.6/include -I/home/prashanth/cgltf-1.15
 
 C_FLAGS = 
 

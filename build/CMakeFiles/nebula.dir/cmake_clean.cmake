@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/nebula.dir/instance.c.o.d"
   "CMakeFiles/nebula.dir/main.c.o"
   "CMakeFiles/nebula.dir/main.c.o.d"
+  "CMakeFiles/nebula.dir/objloader.c.o"
+  "CMakeFiles/nebula.dir/objloader.c.o.d"
   "CMakeFiles/nebula.dir/pipeline.c.o"
   "CMakeFiles/nebula.dir/pipeline.c.o.d"
   "CMakeFiles/nebula.dir/present.c.o"

@@ -1,7 +1,10 @@
 #version 450
-layout(location = 0) in vec3 inColor;
-layout(location = 0) out vec3 fragColor;
+layout(location = 0) in vec3 Colorfromvertex;
+layout(location = 1) in vec2 texcodfragfromvertex;
+layout(location = 0) out vec4 OutColor;
+layout(binding = 1) uniform sampler2D texSampler;
 
 void main() {
-    fragColor = inColor;
+    OutColor = vec4(texcodfragfromvertex,0.0,1.0);
+    OutColor = texture(texSampler,texcodfragfromvertex);
 }

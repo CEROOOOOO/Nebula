@@ -15,7 +15,7 @@ VkSurfaceCapabilitiesKHR surface_capabilities;
 uint32_t number_of_images;
 VkExtent2D size_of_images;
 VkSurfaceTransformFlagBitsKHR surface_transform;
-VkFormat image_format = VK_FORMAT_R8G8B8A8_UNORM;
+VkFormat image_format = VK_FORMAT_R8G8B8A8_SRGB;
 VkColorSpaceKHR image_color_space = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
 VkSurfaceFormatKHR* surface_formats = NULL;
 VkSwapchainKHR swapchain;

@@ -5,7 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include",
-                "/home/prashanth/cglm/cglm-0.9.6/include"
+                "/home/prashanth/cglm/cglm-0.9.6/include",
+                "/home/prashanth/cgltf-1.15"
+
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

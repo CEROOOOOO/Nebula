@@ -140,4 +140,6 @@ CMakeFiles/nebula.dir/cmdbuffer.c.o: \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine2d.h \
  /home/prashanth/Desktop/nebula/renderpass.h \
  /home/prashanth/Desktop/nebula/pipeline.h \
- /home/prashanth/Desktop/nebula/descriptor.h
+ /home/prashanth/Desktop/nebula/descriptor.h \
+ /home/prashanth/Desktop/nebula/objloader.h \
+ /home/prashanth/Desktop/nebula/vertex.h
