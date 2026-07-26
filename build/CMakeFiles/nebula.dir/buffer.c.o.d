@@ -32,7 +32,14 @@ CMakeFiles/nebula.dir/buffer.c.o: /home/prashanth/Desktop/nebula/buffer.c \
  /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/bits/types/once_flag.h /usr/include/bits/stdlib-float.h \
- /usr/include/vulkan/vulkan.h /usr/include/vulkan/vk_platform.h \
+ /usr/include/math.h /usr/include/bits/math-vector.h \
+ /usr/include/bits/libm-simd-decl-stubs.h \
+ /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
+ /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
+ /usr/include/bits/mathcalls-helper-functions.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
+ /usr/include/bits/iscanonical.h /usr/include/vulkan/vulkan.h \
+ /usr/include/vulkan/vk_platform.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h \
  /usr/include/bits/stdint-uintn.h /usr/include/bits/stdint-least.h \
@@ -63,13 +70,6 @@ CMakeFiles/nebula.dir/buffer.c.o: /home/prashanth/Desktop/nebula/buffer.c \
  /usr/include/bits/types/struct_itimerspec.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/cglm.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/common.h \
- /usr/include/math.h /usr/include/bits/math-vector.h \
- /usr/include/bits/libm-simd-decl-stubs.h \
- /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
- /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
- /usr/include/bits/mathcalls-helper-functions.h \
- /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
- /usr/include/bits/iscanonical.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/float.h \
  /home/prashanth/cglm/cglm-0.9.6/include/cglm/types.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/stdalign.h \

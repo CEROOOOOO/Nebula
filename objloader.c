@@ -1,6 +1,5 @@
 #define STB_IMAGE_IMPLEMENTATION
 #define CGLTF_IMPLEMENTATION  // keep if you want it later
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -41,6 +40,8 @@ bool assimp()
         vertexcount += mesh->mNumVertices;
         indexcount += mesh->mNumFaces * 3;
     }
+    printf("vertec count %u\n",vertexcount);
+    printf("index count %u\n",indexcount);
 
     vertices = malloc(sizeof(Vertex) * vertexcount);
     indices  = malloc(sizeof(uint32_t) * indexcount);
@@ -57,7 +58,8 @@ bool assimp()
 
         // Vertices
         for (unsigned int i = 0; i < mesh->mNumVertices; ++i) {
-            uint32_t idx = vertexOffset + i;
+            uint32_t idx = vertexOffset + i;//0+1 or 0+45000 so at last vertex offset is stored 
+            //so
 
             vertices[idx].position[0] = mesh->mVertices[i].x;
             vertices[idx].position[1] = mesh->mVertices[i].y;
@@ -74,7 +76,7 @@ bool assimp()
 
         for (unsigned int f = 0; f < mesh->mNumFaces; ++f) {
             const struct aiFace *face = &mesh->mFaces[f];
-            if (face->mNumIndices != 3) continue; // should be triangulated
+            if (face->mNumIndices != 3) continue; 
 
             indices[indexOffset++] = vertexOffset + face->mIndices[0];
             indices[indexOffset++] = vertexOffset + face->mIndices[1];

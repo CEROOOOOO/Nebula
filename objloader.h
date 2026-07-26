@@ -11,5 +11,6 @@ extern Vertex *vertices;
 extern uint32_t* indices;
 extern uint32_t indexcount;
 extern uint32_t vertexcount;
+bool load_model(const char *modelPath);
 bool assimp();
 void obj_cleanup();

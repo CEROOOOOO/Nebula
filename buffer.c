@@ -1,7 +1,9 @@
 #define _GNU_SOURCE
 #define CGLM_FORCE_DEPTH_ZERO_TO_ONE
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <vulkan/vulkan.h>
 #include "present.h"
 #include "device.h"
@@ -75,6 +77,7 @@ VkPipelineStageFlags generating_stages = VK_PIPELINE_STAGE_TRANSFER_BIT;
 VkPipelineStageFlags consuming_stgaes = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
 VkBufferMemoryBarrier *buffer_memory_barriers = NULL;
 VkDeviceSize imagesize;
+uint32_t miplevels;
 void **ubomapped = NULL;
 void *image_data = NULL;
 struct timespec starttime; // like its stake holder i dont think it will get rewrite
@@ -83,7 +86,7 @@ void initstarttime()
     clock_gettime(CLOCK_MONOTONIC, &starttime); // this will start the timer when called this function from 1970 so its max
 }
 typedef struct
-{ // like from this struct we will define how we will use this barries
+{ // like from this struct we will define how we will use this barries /
     VkBuffer Buffer;
     VkAccessFlags CurrentAccess;
     VkAccessFlags NewAccess;
@@ -114,13 +117,13 @@ VkDeviceSize index_data_size;
 VkDeviceSize ubo_data_size;
 bool datasetup()
 {
-        copyregion.srcOffset = 0;
-        copyregion.dstOffset = 0;
-        copyregion.size = sizeof(Vertex)*vertexcount;
-        index_copyregion.srcOffset = 0;
-        index_copyregion.dstOffset = 0;
-        index_copyregion.size = sizeof(uint32_t)*indexcount;   // memory region that should be mapped and packed from cpu its our source which will be from cpu
-    data_size = sizeof(Vertex) * vertexcount; // size of data to be packed from cpu to the memory object of gp
+    copyregion.srcOffset = 0;
+    copyregion.dstOffset = 0;
+    copyregion.size = sizeof(Vertex) * vertexcount;
+    index_copyregion.srcOffset = 0;
+    index_copyregion.dstOffset = 0;
+    index_copyregion.size = sizeof(uint32_t) * indexcount; // memory region that should be mapped and packed from cpu its our source which will be from cpu
+    data_size = sizeof(Vertex) * vertexcount;              // size of data to be packed from cpu to the memory object of gp
     index_data_size = sizeof(uint32_t) * indexcount;
     ubo_data_size = sizeof(ubox);
     return true;
@@ -235,7 +238,7 @@ void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayo
     barrier.image = image;
     barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
     barrier.subresourceRange.baseMipLevel = 0;
-    barrier.subresourceRange.levelCount = 1;
+    barrier.subresourceRange.levelCount = miplevels;
     barrier.subresourceRange.baseArrayLayer = 0;
     barrier.subresourceRange.layerCount = 1;
     VkPipelineStageFlags sourceStage;
@@ -357,7 +360,7 @@ bool creatingbuffer()
     }*/
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // now let us do the same for staging buffer
-    VkDeviceSize size_staging = sizeof(Vertex)*vertexcount;
+    VkDeviceSize size_staging = sizeof(Vertex) * vertexcount;
     VkBufferUsageFlags usage_staging = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
     VkBufferCreateInfo buffer_create_info_staging = {
         VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
@@ -378,7 +381,7 @@ bool creatingbuffer()
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // now let us do the same for buffer which is going to accept the data from staging buffer
-    VkDeviceSize size_dst_staging = sizeof(Vertex)*vertexcount;
+    VkDeviceSize size_dst_staging = sizeof(Vertex) * vertexcount;
     VkBufferUsageFlags usage_dst_staging = VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
     VkBufferCreateInfo buffer_create_info_dst_staging = {
         VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
@@ -396,7 +399,7 @@ bool creatingbuffer()
         return false;
     }
     // now lets do the same buffer for index you foooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooool
-    VkDeviceSize size_index_staging = sizeof(uint32_t)*indexcount;
+    VkDeviceSize size_index_staging = sizeof(uint32_t) * indexcount;
     VkBufferUsageFlags usage_index_staging = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
     VkBufferCreateInfo buffer_create_info_index_staging = {
         VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
@@ -414,7 +417,7 @@ bool creatingbuffer()
         return false;
     }
     // now let us do the same for buffer which is going to accept the data from staging buffer like from cpu to gpu
-    VkDeviceSize size_index_dst_staging = sizeof(uint32_t)*indexcount;
+    VkDeviceSize size_index_dst_staging = sizeof(uint32_t) * indexcount;
     VkBufferUsageFlags usage_index_dst_staging = VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
     VkBufferCreateInfo buffer_create_info_index_dst_staging = {
         VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
@@ -509,6 +512,97 @@ bool hasStencilComponent(VkFormat format)
 {
     return format == VK_FORMAT_D32_SFLOAT_S8_UINT || format == VK_FORMAT_D24_UNORM_S8_UINT;
 }
+void generateMipmaps(VkImage image, VkFormat imageformat, int32_t texWidth, int32_t texHeight, uint32_t mipLevels)
+{
+    VkFormatProperties formatProperties;
+    vkGetPhysicalDeviceFormatProperties(physical_device, imageformat, &formatProperties);
+    if (!(formatProperties.optimalTilingFeatures & VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT))
+    {
+        printf("texture image format does not support linear blitting!");
+    }
+
+    int32_t mipwidth = texWidth;
+    int32_t mipheight = texHeight;
+    VkCommandBuffer commandBuffer = beginsingletimecommands();
+
+    VkImageMemoryBarrier barrier = {};
+    barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+    barrier.image = image;
+    barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+    barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    barrier.subresourceRange.baseArrayLayer = 0;
+    barrier.subresourceRange.layerCount = 1;
+    barrier.subresourceRange.levelCount = 1;
+    for (uint32_t i = 1; i < mipLevels; i++)
+    {
+        barrier.subresourceRange.baseMipLevel = i - 1; // see here i started from 1 so the base originl mip levl will obviously become the previous
+        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+        barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        barrier.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+
+        vkCmdPipelineBarrier(commandBuffer,
+                             VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0,
+                             0, NULL,
+                             0, NULL,
+                             1, &barrier);
+        VkImageBlit blit = {};
+        blit.srcOffsets[0].x = 0; // according to sources think the frame starting from 0 to the other corner so it means from start
+        blit.srcOffsets[0].y = 0;
+        blit.srcOffsets[0].z = 0;
+        blit.srcOffsets[1].x = mipwidth; // so this is kinda saying whole image
+        blit.srcOffsets[1].y = mipheight;
+        blit.srcOffsets[1].z = 1;
+        blit.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        blit.srcSubresource.mipLevel = i - 1; // before mipmapping its like saying take the imager which is before
+        blit.srcSubresource.baseArrayLayer = 0;
+        blit.srcSubresource.layerCount = 1;
+        blit.dstOffsets[0].x = 0;
+        blit.dstOffsets[0].y = 0;
+        blit.dstOffsets[0].z = 0;
+        blit.dstOffsets[1].x = mipwidth > 0 ? mipwidth / 2 : 1; // region to which data will be blitted
+        blit.dstOffsets[1].y = mipheight > 0 ? mipheight / 2 : 1;
+        blit.dstOffsets[1].z = 1;
+        blit.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        blit.dstSubresource.mipLevel = i; // this is saying after mipmapping like its the image which is mipmapped
+        blit.dstSubresource.baseArrayLayer = 0;
+        blit.dstSubresource.layerCount = 1;
+        vkCmdBlitImage(commandBuffer,
+                       image, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, // see before i did pipeline barrier which transitioned from dst to src
+                       image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, // here in this function i am changing but point to benoted other then this function my whole  programm is still in src in this function i did dst so like in next step shader read will become easy
+                       1, &blit,
+                       VK_FILTER_LINEAR);
+        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;     // see as i said its still in src so i trandition now it to shader read but yeah dont worry the above function already solved this problem now it doesnt even matter for src but why to keave empty so use it
+        barrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL; // my shader will read now
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+        barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT; // shader read
+
+        vkCmdPipelineBarrier(commandBuffer,
+                             VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT, 0, // a barrier to ensure this whole mess is going to be red by fragment shader
+                             0, NULL,
+                             0, NULL,
+                             1, &barrier);
+
+        if (mipwidth > 1)
+            mipwidth /= 2;
+        if (mipheight > 1)
+            mipheight /= 2;
+    }
+    barrier.subresourceRange.baseMipLevel = mipLevels - 1;
+    barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+    barrier.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+    barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+    barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+
+    vkCmdPipelineBarrier(commandBuffer,
+                         VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT, 0,
+                         0, NULL,
+                         0, NULL,
+                         1, &barrier);
+
+    endsingletimecommands(commandBuffer);
+}
 bool depthimage()
 {
     printf("your depth format is %d\n", (int)findDepthFormat());
@@ -570,22 +664,26 @@ bool depthimage()
 bool createtextureimage()
 {
     printf("texWidth = %d\n", texWidth);
-printf("texHeight = %d\n", texHeight);
-printf("pixels = %p\n", (void *)pixels);
-printf("imageSize = %llu\n", (unsigned long long)(texWidth * texHeight * 4));
+    printf("texHeight = %d\n", texHeight);
+    printf("pixels = %p\n", (void *)pixels);
+    printf("imageSize = %llu\n", (unsigned long long)(texWidth * texHeight * 4));
     imagesize = texWidth * texHeight * 4;
+    uint32_t max = MAX(texWidth, texHeight);
+    uint32_t log = log2(max); // this basically gets the power by which 2 should multiply it self like if log2(4) = 2 because 4 can be obtained by multipling 2 two times i can say that 4 can be divided twice like 2 one time and 2 other times
+    // so from this i can check how much time the image height or width can be divided by 2 so like i can get miplevels
+    miplevels = floor(log) + 1;
     // just saying there are rgba four componenets in one pixel so total * 4 our imafge size is declared above na so it will fill the vkdevice whenever we call this function
 
     VkBufferUsageFlags image_usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
     VkBufferCreateInfo image_buffer_create_info_for_image_staging = {0};
-        image_buffer_create_info_for_image_staging.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
-        image_buffer_create_info_for_image_staging.pNext =NULL,
-        image_buffer_create_info_for_image_staging.flags =0,
-        image_buffer_create_info_for_image_staging.size =imagesize,
-        image_buffer_create_info_for_image_staging.usage =image_usage,
-        image_buffer_create_info_for_image_staging.sharingMode =VK_SHARING_MODE_EXCLUSIVE,
-        image_buffer_create_info_for_image_staging.queueFamilyIndexCount =0,
-        image_buffer_create_info_for_image_staging.pQueueFamilyIndices =NULL;
+    image_buffer_create_info_for_image_staging.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+    image_buffer_create_info_for_image_staging.pNext = NULL,
+    image_buffer_create_info_for_image_staging.flags = 0,
+    image_buffer_create_info_for_image_staging.size = imagesize,
+    image_buffer_create_info_for_image_staging.usage = image_usage,
+    image_buffer_create_info_for_image_staging.sharingMode = VK_SHARING_MODE_EXCLUSIVE,
+    image_buffer_create_info_for_image_staging.queueFamilyIndexCount = 0,
+    image_buffer_create_info_for_image_staging.pQueueFamilyIndices = NULL;
     vkCreateBuffer(logical_device, &image_buffer_create_info_for_image_staging, NULL, &image_staging_buffer);
     vkGetBufferMemoryRequirements(logical_device, image_staging_buffer, &memory_requirements_for_image);
     for (uint32_t type = 0; type < physical_device_memory_properties.memoryTypeCount; type++)
@@ -617,12 +715,12 @@ printf("imageSize = %llu\n", (unsigned long long)(texWidth * texHeight * 4));
     imageInfo.extent.width = texWidth;
     imageInfo.extent.height = texHeight;
     imageInfo.extent.depth = 1;
-    imageInfo.mipLevels = 1;
+    imageInfo.mipLevels = miplevels;
     imageInfo.arrayLayers = 1;
     imageInfo.format = VK_FORMAT_R8G8B8A8_SRGB;
     imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;          // like the datta is not shown to use humans so we dont know how the data is organized
     imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED; // initially i dont know the data how is it and i dont care how is it so use this
-    imageInfo.usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
+    imageInfo.usage = VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
     imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE; // used by one queue family
     imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
     imageInfo.flags = 0; // Optional
@@ -651,13 +749,15 @@ printf("imageSize = %llu\n", (unsigned long long)(texWidth * texHeight * 4));
 
     vkBindImageMemory(logical_device, image_destination_buffer, memory_object_for_image_destination, 0); // like saying this memory_object belongs to image_destination_buffer its mine kinda romance after this binding there is no data in destinationn buffer but still we have now space
     // so see image memory bind to memory object for image destination but still its incomplete because we never did vkcopybuffer
-    transitionImageLayout(image_destination_buffer, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);                // image layout transfer dst optimal because for copy bufefr to image it is compulsary
-    copyBufferToImage(image_staging_buffer, image_destination_buffer, texWidth, texHeight);                                                                   /// dont look confused these funcions are defined and they do the stuf for you like i know it good to rewrite because it sharoens concept but its using one time staging buffer we can now use that function as many times as possible reducing boiler plate
-    transitionImageLayout(image_destination_buffer, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL); // now shader can access after this transition
+    transitionImageLayout(image_destination_buffer, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL); // image layout transfer dst optimal because for copy bufefr to image it is compulsary
+    copyBufferToImage(image_staging_buffer, image_destination_buffer, texWidth, texHeight);
+    generateMipmaps(image_destination_buffer, VK_FORMAT_R8G8B8A8_SRGB ,texWidth, texHeight, miplevels);                                                                                /// dont look confused these funcions are defined and they do the stuf for you like i know it good to rewrite because it sharoens concept but its using one time staging buffer we can now use that function as many times as possible reducing boiler plate
+    // above transition chnages the layout to shader read optimal so the mip map also needs the correct layout
     vkDestroyBuffer(logical_device, image_staging_buffer, NULL);
     vkFreeMemory(logical_device, memory_object_for_image_staging, NULL);
     return true;
 }
+
 bool createdestinationimageview()
 {
     // image view are wrappers on vkimage which tells the gpu how to access and interpret the data
@@ -669,7 +769,7 @@ bool createdestinationimageview()
     viewInfo.format = VK_FORMAT_R8G8B8A8_SRGB;
     viewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT; // this is to see colors
     viewInfo.subresourceRange.baseMipLevel = 0;
-    viewInfo.subresourceRange.levelCount = 1;
+    viewInfo.subresourceRange.levelCount = miplevels;
     viewInfo.subresourceRange.baseArrayLayer = 0;
     viewInfo.subresourceRange.layerCount = 1;
     if (vkCreateImageView(logical_device, &viewInfo, NULL, &image_destination_view) != VK_SUCCESS)
@@ -693,9 +793,9 @@ bool createdestinationimagesampler()
     samplerInfo.compareEnable = VK_FALSE;
     samplerInfo.compareOp = VK_COMPARE_OP_ALWAYS;
     samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
-    samplerInfo.mipLodBias = 0.0f;
     samplerInfo.minLod = 0.0f;
-    samplerInfo.maxLod = 0.0f;
+    samplerInfo.maxLod = VK_LOD_CLAMP_NONE;
+    samplerInfo.mipLodBias = 0.0f; // Optional
     if (vkCreateSampler(logical_device, &samplerInfo, NULL, &image_destination_sampler) != VK_SUCCESS)
     {
         printf("failed to create texture sampler!\n");
@@ -845,7 +945,7 @@ bool allocatingandbindingmemory()
 bool stagingresources() // i will just call it vertex buffer
 {                       // here like i created memory in cpu but i cant just right directly on gpu so we staging buffers to mediate tranfer of data which are writte in cpu side to host visible side ig in integrted gpu its not required but ihave rtx 2050 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // its here acting as intermediate which will take dat afrom cpu to gpu
-                                                                  // its the actual data which i want in staging buffer like it contains data to which i will give it host visin=ble buffer
+    // its the actual data which i want in staging buffer like it contains data to which i will give it host visin=ble buffer
     void *local_pointer;                                                                                        // this thing will have the memory address of  that data of stagingbuffer not at all related to gpu memopry
     resultb = vkMapMemory(logical_device, memory_object_for_staging, offset, VK_WHOLE_SIZE, 0, &local_pointer); // here i am getting the local_pointer a adrees of the dta which is cpu it now have the pointer of host visble memory
     if (VK_SUCCESS != resultb)
@@ -936,7 +1036,7 @@ bool updatingubo() // this will get rewrite everyframe like its in loop so this 
     ubox ubo = {};
     mat4 trans = GLM_MAT4_IDENTITY_INIT;
     glm_rotate(trans, elapsedSeconds * glm_rad(90.0f), (vec3){0.01f, 0.01f, 0.01f});
-    glm_scale(trans,(vec3){0.1f,0.1f,0.1f});
+    glm_scale(trans, (vec3){0.1f, 0.1f, 0.1f});
     glm_mat4_copy(trans, ubo.model);
     vec3 eye = {2.0f, 2.0f, 10.0f};
     vec3 cam = {0.0f, 0.0f, -1.0f};
