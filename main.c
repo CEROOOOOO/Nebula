@@ -48,6 +48,7 @@ int main()
     if (createtextureimage())printf("fuck you 24.55\n");
     if (createdestinationimageview())printf("fuck you 24.7\n");
     if (createdestinationimagesampler())printf("fuck you 24.9\n");
+    if (createmsaa())printf("fuck you msaa\n");
     if (depthimage())printf("fuck you 23.99\n");
     if (renderpassandframebuffer())printf("fuck you 24\n");
     if (creatingcommand())printf("fuck you 25\n");

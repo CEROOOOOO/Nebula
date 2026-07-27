@@ -244,7 +244,7 @@ bool createswapchain()/////its zero btw thats why i am getting error
         0,
         presentation_surface,
         number_of_images,
-        image_format,
+        image_format,//this is swapchain format 
         image_color_space,
         image_size,
         1,

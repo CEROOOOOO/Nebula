@@ -39,6 +39,7 @@ VkMemoryRequirements memory_requirements_for_index_dst;
 VkMemoryRequirements memory_requirements_for_image;
 VkMemoryRequirements memory_requirements_for_image_destination;
 VkMemoryRequirements memory_requirements_for_depth_image;
+VkMemoryRequirements memory_requirements_for_msaa;
 VkDeviceMemory memory_object = VK_NULL_HANDLE;                      // idk but object should be null pointer
 VkDeviceMemory memory_object_for_staging = VK_NULL_HANDLE;          // idk but object should be null pointer when we call vkallocate memory it gets populatec with everything we want like from now on we will use this
 VkDeviceMemory memory_object_for_dst_staging = VK_NULL_HANDLE;      // idk but object should be null pointer
@@ -63,6 +64,7 @@ VkMemoryPropertyFlagBits memory_property_for_uniform = VK_MEMORY_PROPERTY_HOST_V
 VkMemoryPropertyFlagBits memory_property_for_image_staging = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
 VkMemoryPropertyFlagBits memory_property_for_image_destination = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 VkMemoryPropertyFlagBits memory_property_for_depth_image = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
+VkMemoryPropertyFlagBits memory_property_for_msaa = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 VkDeviceSize memory_offset;
 VkDeviceSize memory_range;
 VkFormat format = VK_FORMAT_R8G8B8A8_UNORM; // how the buffer should be viewed
@@ -77,10 +79,15 @@ VkPipelineStageFlags generating_stages = VK_PIPELINE_STAGE_TRANSFER_BIT;
 VkPipelineStageFlags consuming_stgaes = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
 VkBufferMemoryBarrier *buffer_memory_barriers = NULL;
 VkDeviceSize imagesize;
+VkImage sampleimage;
+VkImageView sampleimageview;
+VkDeviceMemory memory_object_for_msaa;
+
 uint32_t miplevels;
 void **ubomapped = NULL;
 void *image_data = NULL;
-struct timespec starttime; // like its stake holder i dont think it will get rewrite
+VkSampleCountFlagBits msaaSamples = VK_SAMPLE_COUNT_4_BIT; // so like i want one sample means each pixel is decided by one centre point
+struct timespec starttime;                                 // like its stake holder i dont think it will get rewrite
 void initstarttime()
 {
     clock_gettime(CLOCK_MONOTONIC, &starttime); // this will start the timer when called this function from 1970 so its max
@@ -115,6 +122,40 @@ VkDeviceSize offset = 0;
 VkDeviceSize data_size;
 VkDeviceSize index_data_size;
 VkDeviceSize ubo_data_size;
+VkSampleCountFlagBits getMaxUsableSampleCount()
+{
+    VkPhysicalDeviceProperties physicalDeviceProperties;
+    vkGetPhysicalDeviceProperties(physical_device, &physicalDeviceProperties);
+
+    VkSampleCountFlags counts = physicalDeviceProperties.limits.framebufferColorSampleCounts & physicalDeviceProperties.limits.framebufferDepthSampleCounts;
+    if (counts & VK_SAMPLE_COUNT_64_BIT)
+    {
+        return VK_SAMPLE_COUNT_64_BIT;
+    }
+    if (counts & VK_SAMPLE_COUNT_32_BIT)
+    {
+        return VK_SAMPLE_COUNT_32_BIT;
+    }
+    if (counts & VK_SAMPLE_COUNT_16_BIT)
+    {
+        return VK_SAMPLE_COUNT_16_BIT;
+    }
+    if (counts & VK_SAMPLE_COUNT_8_BIT)
+    {
+        return VK_SAMPLE_COUNT_8_BIT;
+    }
+    if (counts & VK_SAMPLE_COUNT_4_BIT)
+    {
+        return VK_SAMPLE_COUNT_4_BIT;
+    }
+    if (counts & VK_SAMPLE_COUNT_2_BIT)
+    {
+        return VK_SAMPLE_COUNT_2_BIT;
+    }
+
+    return VK_SAMPLE_COUNT_1_BIT;
+}
+
 bool datasetup()
 {
     copyregion.srcOffset = 0;
@@ -603,6 +644,62 @@ void generateMipmaps(VkImage image, VkFormat imageformat, int32_t texWidth, int3
 
     endsingletimecommands(commandBuffer);
 }
+bool createmsaa() // this is responsible for creation of msaa in application like this is given to the background kinda so the multi sampling is used there
+{
+    VkFormat colorFormat = image_format; // this image format i took from swapchain creation
+    VkImageCreateInfo sampleinfo = {0};
+    sampleinfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+    sampleinfo.pNext = NULL;
+    sampleinfo.imageType = VK_IMAGE_TYPE_2D;
+    sampleinfo.extent.width = size_of_images.width;
+    sampleinfo.extent.height = size_of_images.height;
+    sampleinfo.extent.depth = 1;
+    sampleinfo.mipLevels = 1;
+    sampleinfo.format = colorFormat;
+    sampleinfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+    sampleinfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    sampleinfo.usage = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+    sampleinfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+    sampleinfo.samples = msaaSamples;
+    sampleinfo.arrayLayers = 1;
+    if (vkCreateImage(logical_device, &sampleinfo, NULL, &sampleimage) != VK_SUCCESS)
+    {
+        printf("failed to create msaa\n");
+    }
+    vkGetImageMemoryRequirements(logical_device, sampleimage, &memory_requirements_for_msaa); // like the requirements image memory should have
+    for (uint32_t type = 0; type < physical_device_memory_properties.memoryTypeCount; type++)
+    {
+        if ((memory_requirements_for_msaa.memoryTypeBits & (1 << type)) && ((physical_device_memory_properties.memoryTypes[type].propertyFlags & memory_property_for_msaa) == memory_property_for_msaa))
+        {
+            // so memorytypebits are 32 bits on or off so we need to check when type is 0 we left shift one so left side gets 1 we do and if its getting one at that part its true
+            VkMemoryAllocateInfo buffer_memory_allocate_info_for_msaa = {
+                VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+                NULL,
+                memory_requirements_for_msaa.size,
+                type};
+            resultb = vkAllocateMemory(logical_device, &buffer_memory_allocate_info_for_msaa, NULL, &memory_object_for_msaa); // now memory object is populated with buffer which is host visible
+            if (VK_SUCCESS == resultb)
+            {
+                break;
+            }
+        }
+    }
+    vkBindImageMemory(logical_device, sampleimage, memory_object_for_msaa, 0);
+    VkImageViewCreateInfo msaaviewInfo = {0};
+    msaaviewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    msaaviewInfo.image = sampleimage;              // in vulkan tutorials its color image dont be confused my future self
+    msaaviewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D; // view 2d
+    msaaviewInfo.format = colorFormat;
+    msaaviewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT; // this is to see depth
+    msaaviewInfo.subresourceRange.baseMipLevel = 0;
+    msaaviewInfo.subresourceRange.levelCount = 1;
+    msaaviewInfo.subresourceRange.baseArrayLayer = 0;
+    msaaviewInfo.subresourceRange.layerCount = 1;
+    if (vkCreateImageView(logical_device, &msaaviewInfo, NULL, &sampleimageview) != VK_SUCCESS)
+    {
+        printf("failed to create texture image view!\n");
+    }
+}
 bool depthimage()
 {
     printf("your depth format is %d\n", (int)findDepthFormat());
@@ -621,7 +718,7 @@ bool depthimage()
     depthinfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
     depthinfo.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
     depthinfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE; // used by one queue family
-    depthinfo.samples = VK_SAMPLE_COUNT_1_BIT;
+    depthinfo.samples = msaaSamples;                   /// this is changed if i want to have msaa doesnt matter i am creating a new buffer thogh idk why
     if (vkCreateImage(logical_device, &depthinfo, NULL, &depth_image) != VK_SUCCESS)
     {
         printf("failed to create image!\n");
@@ -751,7 +848,7 @@ bool createtextureimage()
     // so see image memory bind to memory object for image destination but still its incomplete because we never did vkcopybuffer
     transitionImageLayout(image_destination_buffer, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL); // image layout transfer dst optimal because for copy bufefr to image it is compulsary
     copyBufferToImage(image_staging_buffer, image_destination_buffer, texWidth, texHeight);
-    generateMipmaps(image_destination_buffer, VK_FORMAT_R8G8B8A8_SRGB ,texWidth, texHeight, miplevels);                                                                                /// dont look confused these funcions are defined and they do the stuf for you like i know it good to rewrite because it sharoens concept but its using one time staging buffer we can now use that function as many times as possible reducing boiler plate
+    generateMipmaps(image_destination_buffer, VK_FORMAT_R8G8B8A8_SRGB, texWidth, texHeight, miplevels); /// dont look confused these funcions are defined and they do the stuf for you like i know it good to rewrite because it sharoens concept but its using one time staging buffer we can now use that function as many times as possible reducing boiler plate
     // above transition chnages the layout to shader read optimal so the mip map also needs the correct layout
     vkDestroyBuffer(logical_device, image_staging_buffer, NULL);
     vkFreeMemory(logical_device, memory_object_for_image_staging, NULL);
@@ -1155,6 +1252,9 @@ void buffer_cleanup()
     vkFreeMemory(logical_device, memory_object_for_image_destination, NULL);
     vkDestroyImageView(logical_device, image_destination_view, NULL);
     vkDestroySampler(logical_device, image_destination_sampler, NULL);
+    vkDestroyImageView(logical_device,sampleimageview, NULL);
+    vkDestroyImage(logical_device, sampleimage, NULL);
+    vkFreeMemory(logical_device, memory_object_for_msaa, NULL);
 
     free(cmdbuffers);
     free(memory_ranges);

@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <vulkan/vulkan.h>
 #include "instance.h"
+#include "buffer.h"
     typedef struct 
     {
         uint32_t FamilyIndex;
@@ -23,7 +24,7 @@ VkQueue graphics_queue;
 VkQueue compute_queue;
 VkPhysicalDevice physical_device;
  uint32_t queue_families_count = 0;//SEE THERE ARE GRAPHICS QUEUE COMPUTE QUEUE IT IS JUST GROUP OF QUEUE
-
+VkSampleCountFlagBits maxsamples;
 
 char const* device_extensions[]= 
 {
@@ -48,6 +49,8 @@ bool enumeratingavailablephysicaldevice()
     printf("physical device created\n");
     physical_device = available_devices[1];///////////////////nvidia aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa//HERE I AM ASSIGNINNG MY PHYSICAL DEVICE PHYSICAL DEVICE IS CREATED 
     printf("physical_device is %p\n", (void*)physical_device);
+    maxsamples = getMaxUsableSampleCount(); //this function will give max sample count sopported by my device 
+    printf("my max sample count is %d\n",maxsamples);
     uint32_t extension_count = 0;
     resultd = vkEnumerateDeviceExtensionProperties(physical_device, NULL, &extension_count, NULL);//CHECKING THE EXTENSIONS IT WILL PROVID E
     if ((resultd != VK_SUCCESS) || (extension_count == 0))

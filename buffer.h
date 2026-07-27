@@ -58,6 +58,8 @@ extern VkImageView image_destination_view;
 extern VkSampler image_destination_sampler;
 extern VkImageView depth_image_view;
 extern size_t indexCount;
+extern VkSampleCountFlagBits msaaSamples;
+extern VkImageView sampleimageview;
 bool bufferbinding();
 bool createtextureimage();
 bool createdestinationimageview();
@@ -74,4 +76,6 @@ typedef struct
     mat4 proj;
 } ubox;
 bool updatingubo();
+bool createmsaa();
 void initstarttime();
+VkSampleCountFlagBits getMaxUsableSampleCount();
