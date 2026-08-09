@@ -22,7 +22,7 @@ int texWidth = 0, texHeight = 0, texChannels = 0;
 bool assimp()
 {
     const struct aiScene *scene = aiImportFile(
-        "/home/prashanth/Desktop/nebula/assets/moon(1).glb",
+        "/home/prashanth/Desktop/nebula/assets/pubg_box.glb",
         aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices
     );
 
