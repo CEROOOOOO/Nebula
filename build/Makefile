@@ -129,245 +129,245 @@ nebula/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/build
 .PHONY : nebula/fast
 
-buffer.o: buffer.c.o
+buffer.o: buffer.cpp.o
 .PHONY : buffer.o
 
 # target to build an object file
-buffer.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/buffer.c.o
-.PHONY : buffer.c.o
+buffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/buffer.cpp.o
+.PHONY : buffer.cpp.o
 
-buffer.i: buffer.c.i
+buffer.i: buffer.cpp.i
 .PHONY : buffer.i
 
 # target to preprocess a source file
-buffer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/buffer.c.i
-.PHONY : buffer.c.i
+buffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/buffer.cpp.i
+.PHONY : buffer.cpp.i
 
-buffer.s: buffer.c.s
+buffer.s: buffer.cpp.s
 .PHONY : buffer.s
 
 # target to generate assembly for a file
-buffer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/buffer.c.s
-.PHONY : buffer.c.s
+buffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/buffer.cpp.s
+.PHONY : buffer.cpp.s
 
-cmdbuffer.o: cmdbuffer.c.o
+cmdbuffer.o: cmdbuffer.cpp.o
 .PHONY : cmdbuffer.o
 
 # target to build an object file
-cmdbuffer.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/cmdbuffer.c.o
-.PHONY : cmdbuffer.c.o
+cmdbuffer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/cmdbuffer.cpp.o
+.PHONY : cmdbuffer.cpp.o
 
-cmdbuffer.i: cmdbuffer.c.i
+cmdbuffer.i: cmdbuffer.cpp.i
 .PHONY : cmdbuffer.i
 
 # target to preprocess a source file
-cmdbuffer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/cmdbuffer.c.i
-.PHONY : cmdbuffer.c.i
+cmdbuffer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/cmdbuffer.cpp.i
+.PHONY : cmdbuffer.cpp.i
 
-cmdbuffer.s: cmdbuffer.c.s
+cmdbuffer.s: cmdbuffer.cpp.s
 .PHONY : cmdbuffer.s
 
 # target to generate assembly for a file
-cmdbuffer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/cmdbuffer.c.s
-.PHONY : cmdbuffer.c.s
+cmdbuffer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/cmdbuffer.cpp.s
+.PHONY : cmdbuffer.cpp.s
 
-descriptor.o: descriptor.c.o
+descriptor.o: descriptor.cpp.o
 .PHONY : descriptor.o
 
 # target to build an object file
-descriptor.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.c.o
-.PHONY : descriptor.c.o
+descriptor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.cpp.o
+.PHONY : descriptor.cpp.o
 
-descriptor.i: descriptor.c.i
+descriptor.i: descriptor.cpp.i
 .PHONY : descriptor.i
 
 # target to preprocess a source file
-descriptor.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.c.i
-.PHONY : descriptor.c.i
+descriptor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.cpp.i
+.PHONY : descriptor.cpp.i
 
-descriptor.s: descriptor.c.s
+descriptor.s: descriptor.cpp.s
 .PHONY : descriptor.s
 
 # target to generate assembly for a file
-descriptor.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.c.s
-.PHONY : descriptor.c.s
+descriptor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/descriptor.cpp.s
+.PHONY : descriptor.cpp.s
 
-device.o: device.c.o
+device.o: device.cpp.o
 .PHONY : device.o
 
 # target to build an object file
-device.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/device.c.o
-.PHONY : device.c.o
+device.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/device.cpp.o
+.PHONY : device.cpp.o
 
-device.i: device.c.i
+device.i: device.cpp.i
 .PHONY : device.i
 
 # target to preprocess a source file
-device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/device.c.i
-.PHONY : device.c.i
+device.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/device.cpp.i
+.PHONY : device.cpp.i
 
-device.s: device.c.s
+device.s: device.cpp.s
 .PHONY : device.s
 
 # target to generate assembly for a file
-device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/device.c.s
-.PHONY : device.c.s
+device.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/device.cpp.s
+.PHONY : device.cpp.s
 
-instance.o: instance.c.o
+instance.o: instance.cpp.o
 .PHONY : instance.o
 
 # target to build an object file
-instance.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/instance.c.o
-.PHONY : instance.c.o
+instance.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/instance.cpp.o
+.PHONY : instance.cpp.o
 
-instance.i: instance.c.i
+instance.i: instance.cpp.i
 .PHONY : instance.i
 
 # target to preprocess a source file
-instance.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/instance.c.i
-.PHONY : instance.c.i
+instance.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/instance.cpp.i
+.PHONY : instance.cpp.i
 
-instance.s: instance.c.s
+instance.s: instance.cpp.s
 .PHONY : instance.s
 
 # target to generate assembly for a file
-instance.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/instance.c.s
-.PHONY : instance.c.s
+instance.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/instance.cpp.s
+.PHONY : instance.cpp.s
 
-main.o: main.c.o
+main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/main.c.o
-.PHONY : main.c.o
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-main.i: main.c.i
+main.i: main.cpp.i
 .PHONY : main.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/main.c.i
-.PHONY : main.c.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-main.s: main.c.s
+main.s: main.cpp.s
 .PHONY : main.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/main.c.s
-.PHONY : main.c.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/main.cpp.s
+.PHONY : main.cpp.s
 
-objloader.o: objloader.c.o
+objloader.o: objloader.cpp.o
 .PHONY : objloader.o
 
 # target to build an object file
-objloader.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.c.o
-.PHONY : objloader.c.o
+objloader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.cpp.o
+.PHONY : objloader.cpp.o
 
-objloader.i: objloader.c.i
+objloader.i: objloader.cpp.i
 .PHONY : objloader.i
 
 # target to preprocess a source file
-objloader.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.c.i
-.PHONY : objloader.c.i
+objloader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.cpp.i
+.PHONY : objloader.cpp.i
 
-objloader.s: objloader.c.s
+objloader.s: objloader.cpp.s
 .PHONY : objloader.s
 
 # target to generate assembly for a file
-objloader.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.c.s
-.PHONY : objloader.c.s
+objloader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/objloader.cpp.s
+.PHONY : objloader.cpp.s
 
-pipeline.o: pipeline.c.o
+pipeline.o: pipeline.cpp.o
 .PHONY : pipeline.o
 
 # target to build an object file
-pipeline.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/pipeline.c.o
-.PHONY : pipeline.c.o
+pipeline.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/pipeline.cpp.o
+.PHONY : pipeline.cpp.o
 
-pipeline.i: pipeline.c.i
+pipeline.i: pipeline.cpp.i
 .PHONY : pipeline.i
 
 # target to preprocess a source file
-pipeline.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/pipeline.c.i
-.PHONY : pipeline.c.i
+pipeline.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/pipeline.cpp.i
+.PHONY : pipeline.cpp.i
 
-pipeline.s: pipeline.c.s
+pipeline.s: pipeline.cpp.s
 .PHONY : pipeline.s
 
 # target to generate assembly for a file
-pipeline.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/pipeline.c.s
-.PHONY : pipeline.c.s
+pipeline.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/pipeline.cpp.s
+.PHONY : pipeline.cpp.s
 
-present.o: present.c.o
+present.o: present.cpp.o
 .PHONY : present.o
 
 # target to build an object file
-present.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/present.c.o
-.PHONY : present.c.o
+present.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/present.cpp.o
+.PHONY : present.cpp.o
 
-present.i: present.c.i
+present.i: present.cpp.i
 .PHONY : present.i
 
 # target to preprocess a source file
-present.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/present.c.i
-.PHONY : present.c.i
+present.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/present.cpp.i
+.PHONY : present.cpp.i
 
-present.s: present.c.s
+present.s: present.cpp.s
 .PHONY : present.s
 
 # target to generate assembly for a file
-present.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/present.c.s
-.PHONY : present.c.s
+present.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/present.cpp.s
+.PHONY : present.cpp.s
 
-renderpass.o: renderpass.c.o
+renderpass.o: renderpass.cpp.o
 .PHONY : renderpass.o
 
 # target to build an object file
-renderpass.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/renderpass.c.o
-.PHONY : renderpass.c.o
+renderpass.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/renderpass.cpp.o
+.PHONY : renderpass.cpp.o
 
-renderpass.i: renderpass.c.i
+renderpass.i: renderpass.cpp.i
 .PHONY : renderpass.i
 
 # target to preprocess a source file
-renderpass.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/renderpass.c.i
-.PHONY : renderpass.c.i
+renderpass.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/renderpass.cpp.i
+.PHONY : renderpass.cpp.i
 
-renderpass.s: renderpass.c.s
+renderpass.s: renderpass.cpp.s
 .PHONY : renderpass.s
 
 # target to generate assembly for a file
-renderpass.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/renderpass.c.s
-.PHONY : renderpass.c.s
+renderpass.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nebula.dir/build.make CMakeFiles/nebula.dir/renderpass.cpp.s
+.PHONY : renderpass.cpp.s
 
 # Help Target
 help:

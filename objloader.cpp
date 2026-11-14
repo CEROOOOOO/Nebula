@@ -1,9 +1,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #define CGLTF_IMPLEMENTATION  // keep if you want it later
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <cgltf.h>
+#include <iostream>
+#include <vector>
 #include "buffer.h"
 #include "stb_image.h"
 #include "vertex.h"
@@ -14,9 +12,9 @@
 
 uint32_t vertexcount = 0;
 uint32_t indexcount = 0;
-Vertex *vertices = NULL;
-uint32_t *indices = NULL;
-unsigned char *pixels = NULL;
+std :: vector <Vertex> vertices;
+std :: vector <uint32_t> indices;
+unsigned char* pixels;
 int texWidth = 0, texHeight = 0, texChannels = 0;
 
 bool assimp()
@@ -43,9 +41,9 @@ bool assimp()
     printf("vertec count %u\n",vertexcount);
     printf("index count %u\n",indexcount);
 
-    vertices = malloc(sizeof(Vertex) * vertexcount);
-    indices  = malloc(sizeof(uint32_t) * indexcount);
-    if (!vertices || !indices) {
+    vertices.resize(vertexcount);
+    indices.resize(indexcount);
+    if (!vertices.data() || !indices.data()) {
         printf("Memory allocation failed\n");
         return false;
     }
@@ -91,7 +89,8 @@ bool assimp()
 
         if (tex->mHeight == 0) {
             // Compressed format (PNG, JPG, etc.) — most common for .glb
-            pixels = stbi_load_from_memory(
+            
+          pixels = stbi_load_from_memory(
                 (unsigned char*)tex->pcData,
                 tex->mWidth,           // size in bytes
                 &texWidth, &texHeight, &texChannels,
@@ -110,16 +109,4 @@ bool assimp()
 
     aiReleaseImport(scene);
     return true;
-}
-
-void obj_cleanup()
-{
-    free(vertices);   vertices = NULL;
-    free(indices);    indices = NULL;
-    if (pixels) {
-        stbi_image_free(pixels);
-        pixels = NULL;
-    }
-    vertexcount = indexcount = 0;
-    texWidth = texHeight = texChannels = 0;
 }

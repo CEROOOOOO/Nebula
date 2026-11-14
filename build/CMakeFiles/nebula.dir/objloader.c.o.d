@@ -32,22 +32,12 @@ CMakeFiles/nebula.dir/objloader.c.o: \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/bits/types/once_flag.h /usr/include/bits/stdlib-float.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/stdbool.h \
- /home/prashanth/cgltf-1.15/cgltf.h \
+ /home/prashanth/Desktop/nebula/buffer.h /usr/include/vulkan/vulkan.h \
+ /usr/include/vulkan/vk_platform.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h \
  /usr/include/bits/stdint-uintn.h /usr/include/bits/stdint-least.h \
- /usr/include/assert.h /usr/include/string.h \
- /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/pthread_stack_min-dynamic.h \
- /usr/include/bits/pthread_stack_min.h /usr/include/bits/posix2_lim.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/float.h \
- /home/prashanth/Desktop/nebula/buffer.h /usr/include/vulkan/vulkan.h \
- /usr/include/vulkan/vk_platform.h /usr/include/vulkan/vulkan_core.h \
+ /usr/include/vulkan/vulkan_core.h \
  /usr/include/vk_video/vulkan_video_codec_h264std.h \
  /usr/include/vk_video/vulkan_video_codecs_common.h \
  /usr/include/vk_video/vulkan_video_codec_h264std_encode.h \
@@ -64,86 +54,95 @@ CMakeFiles/nebula.dir/objloader.c.o: \
  /usr/include/vk_video/vulkan_video_codec_vp9std.h \
  /usr/include/vk_video/vulkan_video_codec_vp9std_decode.h \
  /usr/include/vk_video/vulkan_video_codec_vp9std.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/cglm.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/common.h \
- /usr/include/math.h /usr/include/bits/math-vector.h \
- /usr/include/bits/libm-simd-decl-stubs.h \
+ /home/prashanth/cglm/include/cglm/cglm.h \
+ /home/prashanth/cglm/include/cglm/common.h /usr/include/math.h \
+ /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
  /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/types.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/float.h \
+ /home/prashanth/cglm/include/cglm/types.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/stdalign.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/intrin.h \
+ /home/prashanth/cglm/include/cglm/simd/intrin.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/mmintrin.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/mm_malloc.h \
  /usr/lib/gcc/x86_64-redhat-linux/16/include/emmintrin.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/x86.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/intrin.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec2.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/util.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec2-ext.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec3.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec4-ext.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/vec3-ext.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/ivec2.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/ivec3.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/ivec4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/mat4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/../../common.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/../intrin.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat4x2.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat4x3.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat3.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/mat3.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat3x2.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat3x4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat2.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/mat2.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat2x3.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/mat2x4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine-mat.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/affine.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine-pre.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine-post.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/cam.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/plane.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../common.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../plane.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../mat4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/ortho_rh_no.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp_rh_no.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/persp.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/view_rh_no.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/view_rh.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/frustum.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/quat.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/simd/sse2/quat.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/euler.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/handed/euler_to_quat_rh.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/handed/../common.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/noise.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/aabb2d.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/box.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/color.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/io.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/project.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/project_no.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../vec3.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/clipspace/../vec4.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/sphere.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/ease.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/curve.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/bezier.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/ray.h \
- /home/prashanth/cglm/cglm-0.9.6/include/cglm/affine2d.h \
- /home/prashanth/Desktop/nebula/stb_image.h \
+ /home/prashanth/cglm/include/cglm/simd/x86.h \
+ /home/prashanth/cglm/include/cglm/simd/intrin.h \
+ /home/prashanth/cglm/include/cglm/vec2.h \
+ /home/prashanth/cglm/include/cglm/util.h \
+ /home/prashanth/cglm/include/cglm/vec2-ext.h \
+ /home/prashanth/cglm/include/cglm/vec3.h \
+ /home/prashanth/cglm/include/cglm/vec4.h \
+ /home/prashanth/cglm/include/cglm/vec4-ext.h \
+ /home/prashanth/cglm/include/cglm/vec3-ext.h \
+ /home/prashanth/cglm/include/cglm/ivec2.h \
+ /home/prashanth/cglm/include/cglm/ivec3.h \
+ /home/prashanth/cglm/include/cglm/ivec4.h \
+ /home/prashanth/cglm/include/cglm/mat4.h \
+ /home/prashanth/cglm/include/cglm/simd/sse2/mat4.h \
+ /home/prashanth/cglm/include/cglm/simd/sse2/../../common.h \
+ /home/prashanth/cglm/include/cglm/simd/sse2/../intrin.h \
+ /usr/include/assert.h /home/prashanth/cglm/include/cglm/mat4x2.h \
+ /home/prashanth/cglm/include/cglm/mat4x3.h \
+ /home/prashanth/cglm/include/cglm/mat3.h \
+ /home/prashanth/cglm/include/cglm/simd/sse2/mat3.h \
+ /home/prashanth/cglm/include/cglm/mat3x2.h \
+ /home/prashanth/cglm/include/cglm/mat3x4.h \
+ /home/prashanth/cglm/include/cglm/mat2.h \
+ /home/prashanth/cglm/include/cglm/simd/sse2/mat2.h \
+ /home/prashanth/cglm/include/cglm/mat2x3.h \
+ /home/prashanth/cglm/include/cglm/mat2x4.h \
+ /home/prashanth/cglm/include/cglm/affine.h \
+ /home/prashanth/cglm/include/cglm/affine-mat.h \
+ /home/prashanth/cglm/include/cglm/simd/sse2/affine.h \
+ /home/prashanth/cglm/include/cglm/affine-pre.h \
+ /home/prashanth/cglm/include/cglm/affine-post.h \
+ /home/prashanth/cglm/include/cglm/cam.h \
+ /home/prashanth/cglm/include/cglm/plane.h \
+ /home/prashanth/cglm/include/cglm/clipspace/persp.h \
+ /home/prashanth/cglm/include/cglm/clipspace/../common.h \
+ /home/prashanth/cglm/include/cglm/clipspace/../plane.h \
+ /home/prashanth/cglm/include/cglm/clipspace/../mat4.h \
+ /home/prashanth/cglm/include/cglm/clipspace/ortho_rh_no.h \
+ /home/prashanth/cglm/include/cglm/clipspace/persp_rh_no.h \
+ /home/prashanth/cglm/include/cglm/clipspace/persp.h \
+ /home/prashanth/cglm/include/cglm/clipspace/view_rh_no.h \
+ /home/prashanth/cglm/include/cglm/clipspace/view_rh.h \
+ /home/prashanth/cglm/include/cglm/frustum.h \
+ /home/prashanth/cglm/include/cglm/quat.h \
+ /home/prashanth/cglm/include/cglm/simd/sse2/quat.h \
+ /home/prashanth/cglm/include/cglm/euler.h \
+ /home/prashanth/cglm/include/cglm/handed/euler_to_quat_rh.h \
+ /home/prashanth/cglm/include/cglm/handed/../common.h \
+ /home/prashanth/cglm/include/cglm/noise.h \
+ /home/prashanth/cglm/include/cglm/aabb2d.h \
+ /home/prashanth/cglm/include/cglm/box.h \
+ /home/prashanth/cglm/include/cglm/color.h \
+ /home/prashanth/cglm/include/cglm/io.h \
+ /home/prashanth/cglm/include/cglm/project.h \
+ /home/prashanth/cglm/include/cglm/clipspace/project_no.h \
+ /home/prashanth/cglm/include/cglm/clipspace/../vec3.h \
+ /home/prashanth/cglm/include/cglm/clipspace/../vec4.h \
+ /home/prashanth/cglm/include/cglm/sphere.h \
+ /home/prashanth/cglm/include/cglm/ease.h \
+ /home/prashanth/cglm/include/cglm/curve.h \
+ /home/prashanth/cglm/include/cglm/bezier.h \
+ /home/prashanth/cglm/include/cglm/ray.h \
+ /home/prashanth/cglm/include/cglm/affine2d.h \
+ /home/prashanth/cglm/include/cglm/affine2d-post.h \
+ /home/prashanth/Desktop/nebula/stb_image.h /usr/include/string.h \
+ /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
+ /usr/include/strings.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/16/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/pthread_stack_min-dynamic.h \
+ /usr/include/bits/pthread_stack_min.h /usr/include/bits/posix2_lim.h \
  /home/prashanth/Desktop/nebula/vertex.h /usr/include/assimp/cimport.h \
  /usr/include/assimp/importerdesc.h /usr/include/assimp/types.h \
  /usr/include/assimp/defs.h /usr/include/assimp/config.h \

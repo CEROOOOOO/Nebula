@@ -8,17 +8,18 @@
 #include "pipeline.h"
 #include "descriptor.h"
 #include "objloader.h"
-VkDeviceSize destination_offset;
+#include "cmdbuffer.h"
+VkDeviceSize destination_offset; // specifies how many bytes from the start of a destination buffer Vulkan should begin writing data.
 VkResult resultcmd = VK_SUCCESS;
 VkCommandPool command_pool;
-VkSemaphore renderfinishedsemaphore;
+VkSemaphore renderfinishedsemaphore; // idk why is it here i created it presnet.cpp renderfinishedsemaphore and imageavailablesemaphore
 VkCommandBuffer command_buffer;
-VkCommandBuffer staging_command_buffer;
-VkCommandBuffer *command_buffers = NULL;
-VkCommandBuffer *staging_command_buffers = NULL;
-VkCommandBufferUsageFlags usage = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-VkCommandBufferInheritanceInfo *secondary_command_buffer_info = NULL;
-VkSemaphore *waitsemaphores = NULL;
+VkCommandBuffer staging_command_buffer; //dedicated command buffer used solely for uploading data (like vertices, indices, or textures) from your CPU to the GPU—separate from the main command buffer you use to draw frames every loopr
+std :: vector <VkCommandBuffer> command_buffers; //one Command Buffer per Swapchain Image
+std :: vector <VkCommandBuffer> staging_command_buffers; // if my uploading data has many chunks of vector
+VkCommandBufferUsageFlags usage = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;// s a flag you pass to vkBeginCommandBuffer to tell the Vulkan driver: "I am going to execute this command buffer once, and then immediately reset or destroy it."
+std :: vector <VkCommandBufferInheritanceInfo> secondary_command_buffer_info; // VkCommandBufferInheritanceInfo tells a secondary command buffer what state it is inheriting from the primary command buffer that calls it
+std :: vector <VkSemaphore> waitsemaphores;
 /// main thing to say call your buffer or renderpass or anything here dont create them  here //////////////////////////////////////
 bool creatingcommand()
 {
@@ -44,21 +45,21 @@ bool creatingcommand()
                                                                 command_pool,
                                                                 VK_COMMAND_BUFFER_LEVEL_PRIMARY,
                                                                 count};
-    VkCommandBufferAllocateInfo staaging_command_buffer_allocate_info = {
+    VkCommandBufferAllocateInfo staging_command_buffer_allocate_info = {
         VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
         NULL,
         command_pool,
         VK_COMMAND_BUFFER_LEVEL_PRIMARY,
         count};
-    command_buffers = malloc(count * sizeof(VkCommandBuffer));
-    staging_command_buffers = malloc(count * sizeof(VkCommandBuffer));
+    command_buffers.resize(count);
+    staging_command_buffers.resize(count);
     resultcmd = vkAllocateCommandBuffers(logical_device, &command_buffer_allocate_info, &command_buffers[0]);
     if (VK_SUCCESS != resultcmd)
     {
         printf("couldn't create command buffer\n");
         return false;
     }
-    resultcmd = vkAllocateCommandBuffers(logical_device, &command_buffer_allocate_info, &staging_command_buffers[0]);
+    resultcmd = vkAllocateCommandBuffers(logical_device, &staging_command_buffer_allocate_info, &staging_command_buffers[0]);
     if (VK_SUCCESS != resultcmd)
     {
         printf("couldn't create staging command buffer\n");
@@ -237,7 +238,7 @@ bool renderloop()
         2,
         clear_values};
     VkSubmitInfo submit_info;
-    waitsemaphores = malloc(sizeof(VkSemaphore) * 1);
+    waitsemaphores.resize(1);
     waitsemaphores[0] = imageavailablesemaphore; // i will wait for image available semaphore which is signaled from vkacquirenextimagekhr just assigning it the first index of my malloc cause why not
     VkPipelineStageFlags waitstages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
     // HERE SIGNALSEMAPHORE I WILL EXTERN IT CAUSE MY PRESENT WILL PROBABLY USE IT
@@ -253,7 +254,7 @@ bool renderloop()
         VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
         NULL,
         usage,
-        secondary_command_buffer_info};
+        secondary_command_buffer_info.data()};
     resultcmd = vkBeginCommandBuffer(command_buffers[image_index], &command_buffer_begin_info);
     if (VK_SUCCESS != resultcmd)
     {
@@ -526,12 +527,4 @@ bool destroyingcmdpool()
     }
     return true;
 }*/
-void cmdbuffer_cleanup()
-{
 
-    vkFreeCommandBuffers(logical_device, command_pool, 1, command_buffers);
-    vkFreeCommandBuffers(logical_device, command_pool, 1, staging_command_buffers);
-
-    vkDestroyCommandPool(logical_device, command_pool, NULL);
-    free(waitsemaphores);
-}

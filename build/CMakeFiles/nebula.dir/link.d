@@ -2,32 +2,35 @@ nebula: \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o \
   /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o \
-  CMakeFiles/nebula.dir/instance.c.o \
-  CMakeFiles/nebula.dir/device.c.o \
-  CMakeFiles/nebula.dir/present.c.o \
-  CMakeFiles/nebula.dir/buffer.c.o \
-  CMakeFiles/nebula.dir/cmdbuffer.c.o \
-  CMakeFiles/nebula.dir/renderpass.c.o \
-  CMakeFiles/nebula.dir/pipeline.c.o \
-  CMakeFiles/nebula.dir/descriptor.c.o \
-  CMakeFiles/nebula.dir/objloader.c.o \
-  CMakeFiles/nebula.dir/main.c.o \
+  /usr/lib/gcc/x86_64-redhat-linux/16/libasan_preinit.o \
+  /usr/lib/gcc/x86_64-redhat-linux/16/libasan.so \
+  /usr/lib/gcc/x86_64-redhat-linux/16/libasan.so \
+  /usr/lib/gcc/x86_64-redhat-linux/16/libasan.so \
+  /usr/lib64/libasan.so.8.0.0 \
+  CMakeFiles/nebula.dir/instance.cpp.o \
+  CMakeFiles/nebula.dir/device.cpp.o \
+  CMakeFiles/nebula.dir/present.cpp.o \
+  CMakeFiles/nebula.dir/buffer.cpp.o \
+  CMakeFiles/nebula.dir/cmdbuffer.cpp.o \
+  CMakeFiles/nebula.dir/renderpass.cpp.o \
+  CMakeFiles/nebula.dir/pipeline.cpp.o \
+  CMakeFiles/nebula.dir/descriptor.cpp.o \
+  CMakeFiles/nebula.dir/objloader.cpp.o \
+  CMakeFiles/nebula.dir/main.cpp.o \
   /usr/lib64/libvulkan.so \
   /usr/lib64/libglfw.so.3.4 \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libassimp.so \
+  /usr/lib/gcc/x86_64-redhat-linux/16/libstdc++.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
   /lib64/libm.so.6 \
   /lib64/libmvec.so.1 \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
   /lib64/libgcc_s.so.1 \
+  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/libatomic_asneeded.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libatomic_asneeded.so \
@@ -42,22 +45,17 @@ nebula: \
   /lib64/libc.so.6 \
   /usr/lib64/libc_nonshared.a \
   /lib64/ld-linux-x86-64.so.2 \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
   /lib64/libgcc_s.so.1 \
+  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o \
   /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o \
   /usr/lib64/libz.so.1 \
   /usr/lib64/libpoly2tri.so.1.0 \
   /usr/lib64/libpugixml.so.1 \
-  /lib64/libgcc_s.so.1 \
-  /usr/lib64/libstdc++.so.6 \
   /lib64/ld-linux-x86-64.so.2
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o:
@@ -66,31 +64,43 @@ nebula: \
 
 /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o:
 
-CMakeFiles/nebula.dir/instance.c.o:
+/usr/lib/gcc/x86_64-redhat-linux/16/libasan_preinit.o:
 
-CMakeFiles/nebula.dir/device.c.o:
+/usr/lib/gcc/x86_64-redhat-linux/16/libasan.so:
 
-CMakeFiles/nebula.dir/present.c.o:
+/usr/lib/gcc/x86_64-redhat-linux/16/libasan.so:
 
-CMakeFiles/nebula.dir/buffer.c.o:
+/usr/lib/gcc/x86_64-redhat-linux/16/libasan.so:
 
-CMakeFiles/nebula.dir/cmdbuffer.c.o:
+/usr/lib64/libasan.so.8.0.0:
 
-CMakeFiles/nebula.dir/renderpass.c.o:
+CMakeFiles/nebula.dir/instance.cpp.o:
 
-CMakeFiles/nebula.dir/pipeline.c.o:
+CMakeFiles/nebula.dir/device.cpp.o:
 
-CMakeFiles/nebula.dir/descriptor.c.o:
+CMakeFiles/nebula.dir/present.cpp.o:
 
-CMakeFiles/nebula.dir/objloader.c.o:
+CMakeFiles/nebula.dir/buffer.cpp.o:
 
-CMakeFiles/nebula.dir/main.c.o:
+CMakeFiles/nebula.dir/cmdbuffer.cpp.o:
+
+CMakeFiles/nebula.dir/renderpass.cpp.o:
+
+CMakeFiles/nebula.dir/pipeline.cpp.o:
+
+CMakeFiles/nebula.dir/descriptor.cpp.o:
+
+CMakeFiles/nebula.dir/objloader.cpp.o:
+
+CMakeFiles/nebula.dir/main.cpp.o:
 
 /usr/lib64/libvulkan.so:
 
 /usr/lib64/libglfw.so.3.4:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libassimp.so:
+
+/usr/lib/gcc/x86_64-redhat-linux/16/libstdc++.so:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so:
 
@@ -102,14 +112,6 @@ CMakeFiles/nebula.dir/main.c.o:
 
 /lib64/libmvec.so.1:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
-
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
-
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
-
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
-
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
@@ -117,6 +119,8 @@ CMakeFiles/nebula.dir/main.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
 
 /lib64/libgcc_s.so.1:
+
+/usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
 
@@ -146,14 +150,6 @@ CMakeFiles/nebula.dir/main.c.o:
 
 /lib64/ld-linux-x86-64.so.2:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
-
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
-
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
-
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
-
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
@@ -161,6 +157,8 @@ CMakeFiles/nebula.dir/main.c.o:
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
 
 /lib64/libgcc_s.so.1:
+
+/usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
 
 /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
 
@@ -173,9 +171,5 @@ CMakeFiles/nebula.dir/main.c.o:
 /usr/lib64/libpoly2tri.so.1.0:
 
 /usr/lib64/libpugixml.so.1:
-
-/lib64/libgcc_s.so.1:
-
-/usr/lib64/libstdc++.so.6:
 
 /lib64/ld-linux-x86-64.so.2:

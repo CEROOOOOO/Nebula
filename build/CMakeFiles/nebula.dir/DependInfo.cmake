@@ -8,16 +8,16 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/prashanth/Desktop/nebula/buffer.c" "CMakeFiles/nebula.dir/buffer.c.o" "gcc" "CMakeFiles/nebula.dir/buffer.c.o.d"
-  "/home/prashanth/Desktop/nebula/cmdbuffer.c" "CMakeFiles/nebula.dir/cmdbuffer.c.o" "gcc" "CMakeFiles/nebula.dir/cmdbuffer.c.o.d"
-  "/home/prashanth/Desktop/nebula/descriptor.c" "CMakeFiles/nebula.dir/descriptor.c.o" "gcc" "CMakeFiles/nebula.dir/descriptor.c.o.d"
-  "/home/prashanth/Desktop/nebula/device.c" "CMakeFiles/nebula.dir/device.c.o" "gcc" "CMakeFiles/nebula.dir/device.c.o.d"
-  "/home/prashanth/Desktop/nebula/instance.c" "CMakeFiles/nebula.dir/instance.c.o" "gcc" "CMakeFiles/nebula.dir/instance.c.o.d"
-  "/home/prashanth/Desktop/nebula/main.c" "CMakeFiles/nebula.dir/main.c.o" "gcc" "CMakeFiles/nebula.dir/main.c.o.d"
-  "/home/prashanth/Desktop/nebula/objloader.c" "CMakeFiles/nebula.dir/objloader.c.o" "gcc" "CMakeFiles/nebula.dir/objloader.c.o.d"
-  "/home/prashanth/Desktop/nebula/pipeline.c" "CMakeFiles/nebula.dir/pipeline.c.o" "gcc" "CMakeFiles/nebula.dir/pipeline.c.o.d"
-  "/home/prashanth/Desktop/nebula/present.c" "CMakeFiles/nebula.dir/present.c.o" "gcc" "CMakeFiles/nebula.dir/present.c.o.d"
-  "/home/prashanth/Desktop/nebula/renderpass.c" "CMakeFiles/nebula.dir/renderpass.c.o" "gcc" "CMakeFiles/nebula.dir/renderpass.c.o.d"
+  "/home/prashanth/Desktop/nebula/buffer.cpp" "CMakeFiles/nebula.dir/buffer.cpp.o" "gcc" "CMakeFiles/nebula.dir/buffer.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/cmdbuffer.cpp" "CMakeFiles/nebula.dir/cmdbuffer.cpp.o" "gcc" "CMakeFiles/nebula.dir/cmdbuffer.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/descriptor.cpp" "CMakeFiles/nebula.dir/descriptor.cpp.o" "gcc" "CMakeFiles/nebula.dir/descriptor.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/device.cpp" "CMakeFiles/nebula.dir/device.cpp.o" "gcc" "CMakeFiles/nebula.dir/device.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/instance.cpp" "CMakeFiles/nebula.dir/instance.cpp.o" "gcc" "CMakeFiles/nebula.dir/instance.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/main.cpp" "CMakeFiles/nebula.dir/main.cpp.o" "gcc" "CMakeFiles/nebula.dir/main.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/objloader.cpp" "CMakeFiles/nebula.dir/objloader.cpp.o" "gcc" "CMakeFiles/nebula.dir/objloader.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/pipeline.cpp" "CMakeFiles/nebula.dir/pipeline.cpp.o" "gcc" "CMakeFiles/nebula.dir/pipeline.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/present.cpp" "CMakeFiles/nebula.dir/present.cpp.o" "gcc" "CMakeFiles/nebula.dir/present.cpp.o.d"
+  "/home/prashanth/Desktop/nebula/renderpass.cpp" "CMakeFiles/nebula.dir/renderpass.cpp.o" "gcc" "CMakeFiles/nebula.dir/renderpass.cpp.o.d"
   "" "nebula" "gcc" "CMakeFiles/nebula.dir/link.d"
   )
 

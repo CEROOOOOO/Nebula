@@ -8,8 +8,8 @@
 VkResult resultr = VK_SUCCESS;
 VkRenderPass render_pass;
 VkFramebuffer framebuffer;
-VkFramebuffer *swapchain_frame_buffers = NULL;
-VkAttachmentDescription *attachments;
+std :: vector <VkFramebuffer> swapchain_frame_buffers;
+std :: vector <VkAttachmentDescription> attachments;
 bool renderpassandframebuffer() // idk how this works but think like there are wo swapchain and one semaphore is signaked when image is acqwuired after that image aquiring there are many steps
 {                               // maily all are in command buffer this is alsp in cmd buffer like wheen i call render pass i have to specify different drawing command for that image like i did all these buit at last these all point towarsd render pass
                                 // like color attachembnt it have multiple suppass for multiple things which can be done in render pass
@@ -193,7 +193,7 @@ bool renderpassandframebuffer() // idk how this works but think like there are w
     subpass.pColorAttachments = &colorAttachmentRef;
     subpass.pDepthStencilAttachment = &depthAttachmentRef;
     subpass.pResolveAttachments = &colorAttachmentResolveRef;
-    attachments = malloc(sizeof(VkAttachmentDescription) * 3);
+attachments.resize(3);
     attachments[0] = color_attachment;
     attachments[1] = depthAttachment;
     attachments[2] = colorAttachmentResolve;
@@ -245,7 +245,7 @@ bool renderpassandframebuffer() // idk how this works but think like there are w
     // LIKE SEE FARMEBUFFERS MEANS JUST THE AREA IN WINDOW I WILL DRAW THINGS ON I DEFINED A RENDER PASS WITH SOME CRUCIAL INSTRUCTIONS THOSE INSTRUCTIONS NEED TO BE
     // PLACED SOMEWHERE SO FRAMEBUUFERS IS THE POINT WHERE ALL THESE FUNCTIONS I DEFINED ABOVE WILL RENDER
     // I HAVE 3 SLIDES OFSWAPCHAIN IMAGES SO I NEED 3 FRAMEBUFFERS RATHER THAN HARD CODING JUST CREATE A VECTOR
-    swapchain_frame_buffers = (VkFramebuffer *)malloc(images_count * sizeof(VkFramebuffer));
+    swapchain_frame_buffers.resize(images_count);
     for (size_t i = 0; i < images_count; i++)
     {
         VkImageView attachments[3] = {sampleimageview,depth_image_view,swapchain_image_views[i]};
@@ -266,15 +266,4 @@ bool renderpassandframebuffer() // idk how this works but think like there are w
     }
     framebuffer = swapchain_frame_buffers[image_index]; // image index is the index of next available image which is defined by vkacquire nexrt image khr
     return true;
-}
-void renderpass_cleanup()
-{
-    free(swapchain_frame_buffers);
-    free(attachments);
-    vkDestroyRenderPass(logical_device, render_pass, NULL);
-    for (int i = 0; i < images_count; i++)
-    {
-        vkDestroyFramebuffer(logical_device, swapchain_frame_buffers[i], NULL);
-    }
-    vkDestroyFramebuffer(logical_device, framebuffer, NULL);
 }

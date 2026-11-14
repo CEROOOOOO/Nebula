@@ -72,15 +72,6 @@ int main()
         presentinganimage();
     }
 // freeing task of all mallocs i did
-    pipeline_cleanup();
-    renderpass_cleanup();
-    cmdbuffer_cleanup();
-    buffer_cleanup();
-    present_cleanup();
-    device_cleanup(); 
-    instance_cleanup();
-    descriptor_cleanup();
-    obj_cleanup();
     //  if(creatingbufferview())std::cout<<"fuck you26\n";
       //JUST FORGET ABOUT IMAGE BUFFER LIKE I AM NIT RENDERING ANY TEXTURE YET SO WILL JUST USE BUFFER THATS IT
       //    //if(creatinganimage())std::cout<<"fuck you27\n";

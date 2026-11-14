@@ -1,40 +1,43 @@
-#define _GNU_SOURCE
-#define CGLM_FORCE_DEPTH_ZERO_TO_ONE
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
-#include <stdio.h>
-#include <stdlib.h>
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::perspective, glm::lookAt
+#include <glm/gtc/type_ptr.hpp>         // glm::value_ptr (if needed)
+#include <iostream>
+#include <vector>
+#include <algorithm>
 #include <math.h>
 #include <vulkan/vulkan.h>
 #include "present.h"
 #include "device.h"
 #include <string.h>
 #include <time.h>
-#include <cglm/cglm.h>
 #include "objloader.h"
 #include "vertex.h"
 VkBuffer buffer;               // this too remove
 VkBuffer uniform_texel_buffer; // dont care
 VkBuffer storage_texel_buffer; // dont care
 VkBuffer staging_buffer;       // sufficient
-VkBuffer image_staging_buffer;
-VkImage image_destination_buffer; // like its the destination for image data instead of buffer just create vkimage idk why but do as website says dont argue
+VkBuffer image_staging_buffer; //A VkBuffer represents raw, unformatted linear bytes—meaning your CPU can map it (vkMapMemory) and memcpy your pixel array straight into it with zero conversion.
+VkImage image_destination_buffer;//Stores what the image looks like—its width, height, pixel format (VK_FORMAT_R8G8B8A8_SRGB), mipmap levels, layout, and usage flags—with zero actual memory allocated yet. 
 VkImage depth_image;
 VkBuffer staging_dst_buffer;
-VkBuffer index_buffer;
+VkBuffer index_buffer; //index coordinates
+std :: vector <VkBuffer> uniform_buffers; // new type of buffer in which the opeartion is not linear it can make calcy;
 VkBuffer index_staging_buffer;
-VkBuffer *uniform_buffers = NULL;
-VkImageView image_destination_view;
+VkImageView image_destination_view;//Shaders and framebuffers never touch a VkImage directly. You wrap it in a VkImageView to tell Vulkan how to read those bytes (for example, "treat this as a 2D color target" or "read only mip level 0").
 VkImageView depth_image_view;
-VkSampler image_destination_sampler;
+VkSampler image_destination_sampler; //VkSampler is a separate Vulkan object that configures how your shader reads ("samples") pixels from a VkImage—controlling smoothing, tiling, and sharpness without touching the underlying image data.
 VkPhysicalDeviceMemoryProperties physical_device_memory_properties;
 VkMemoryRequirements memory_requirements;                        // memory requirements we get requirements of that memory properties
-VkMemoryRequirements memory_requirements_for_staging;            // requirements i will need for staging buffer
+VkMemoryRequirements memory_requirements_for_staging;            // VkMemoryRequirements is the bridge between the buffer descriptor (VkBuffer) and the actual physical memory (VkDeviceMemory). After you call vkCreateBuffer, you call vkGetBufferMemoryRequirements to ask the GPU driver: "Given how I plan to use this buffer, what kind of physical memory chunk does it need?"
 VkMemoryRequirements memory_requirements_for_dst_staging;        // requirements i will need for staging buffer
 VkMemoryRequirements memory_requirements_for_uniform_texel;      // requirements i will need for staging buffer
 VkMemoryRequirements memory_requirements_for_storage_texel;      // requirements i will need for staging buffer
 VkMemoryRequirements memory_requirements_for_index_staging;      // bro like this will give my cpu value to gpy its a temporary sacrifice
 VkMemoryRequirements memory_requirements_fubomappedor_index_dst; // like this with some magic this will hold data in gpu
-VkMemoryRequirements memory_requirements_for_uniform;
+VkMemoryRequirements memory_requirements_for_uniform; 
 VkMemoryRequirements memory_requirements_for_index_dst;
 VkMemoryRequirements memory_requirements_for_image;
 VkMemoryRequirements memory_requirements_for_image_destination;
@@ -52,7 +55,7 @@ VkDeviceMemory memory_object_for_index_dst;                         // like this
 VkDeviceMemory memory_object_for_image_staging;
 VkDeviceMemory memory_object_for_image_destination;
 VkDeviceMemory memory_object_for_depth_image;
-VkDeviceMemory *memory_object_for_uniform = NULL;
+std :: vector < VkDeviceMemory > memory_object_for_uniform;
 VkMemoryPropertyFlagBits memory_properties = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 VkMemoryPropertyFlagBits memory_property_for_staging = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 VkMemoryPropertyFlagBits memory_property_for_dst_staging = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
@@ -60,8 +63,8 @@ VkMemoryPropertyFlagBits memory_property_for_uniform_texel = VK_MEMORY_PROPERTY_
 VkMemoryPropertyFlagBits memory_property_for_storage_texel = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 VkMemoryPropertyFlagBits memory_property_for_index_staging = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 VkMemoryPropertyFlagBits memory_property_for_index_dst = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
-VkMemoryPropertyFlagBits memory_property_for_uniform = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT; // IDK WHYYYYYYY DONT ASK ME
-VkMemoryPropertyFlagBits memory_property_for_image_staging = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
+VkMemoryPropertyFlags memory_property_for_uniform = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT; // IDK WHYYYYYYY DONT ASK ME
+VkMemoryPropertyFlags memory_property_for_image_staging = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT;
 VkMemoryPropertyFlagBits memory_property_for_image_destination = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 VkMemoryPropertyFlagBits memory_property_for_depth_image = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 VkMemoryPropertyFlagBits memory_property_for_msaa = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
@@ -73,18 +76,19 @@ VkSemaphore semaphorecmd;
 VkFence fencecmd;
 VkCommandBuffer cmdbufferforstaging;
 VkCommandPool cmdpoolforstaging;
-VkVertexInputBindingDescription *binding_descriptions = NULL;
-VkVertexInputAttributeDescription *attribute_descriptions = NULL;
+std :: vector <VkVertexInputBindingDescription> binding_descriptions;
+std :: vector <VkVertexInputAttributeDescription> attribute_descriptions;
 VkPipelineStageFlags generating_stages = VK_PIPELINE_STAGE_TRANSFER_BIT;
 VkPipelineStageFlags consuming_stgaes = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
-VkBufferMemoryBarrier *buffer_memory_barriers = NULL;
+std :: vector <VkBufferMemoryBarrier> buffer_memory_barriers;
 VkDeviceSize imagesize;
 VkImage sampleimage;
 VkImageView sampleimageview;
 VkDeviceMemory memory_object_for_msaa;
 
 uint32_t miplevels;
-void **ubomapped = NULL;
+
+std :: vector <void*> ubomapped; 
 void *image_data = NULL;
 VkSampleCountFlagBits msaaSamples = VK_SAMPLE_COUNT_4_BIT; // so like i want one sample means each pixel is decided by one centre point
 struct timespec starttime;                                 // like its stake holder i dont think it will get rewrite
@@ -100,24 +104,23 @@ typedef struct
     uint32_t CurrentQueueFamily;
     uint32_t NewQueueFamily;
 } BufferTransition;
-typedef struct
-{
-    mat4 model;
-    mat4 view;
-    mat4 proj;
-} ubox;
+struct ubox {
+    alignas(16) glm::mat4 model;
+    alignas(16) glm::mat4 view;
+    alignas(16) glm::mat4 proj;
+};
 // Triangle vertices (NDC coordinates, so it shows up without any transforms)
-VkBufferCopy copyregion = {0};
-VkBufferCopy index_copyregion = {0};
+VkBufferCopy copyregion{};
+VkBufferCopy index_copyregion{};
 // VkBufferCopy image_copyregion = {
 //   .srcOffset = 0,
 //.dstOffset = 0,
 //.size = imagesize
 ///};i think i dont need thi si am passing it in a function which has size has size as its input as offset and dst are always 0
-VkCommandBuffer *cmdbuffers = NULL;
-VkMappedMemoryRange *memory_ranges = NULL;
-VkMappedMemoryRange *memory_ranges_for_index = NULL;
-BufferTransition *buffer_transitions = NULL;
+std :: vector < VkCommandBuffer> cmdbuffers;
+std :: vector < VkMappedMemoryRange> memory_ranges;
+std :: vector < VkMappedMemoryRange > memory_ranges_for_index;
+std :: vector < BufferTransition > buffer_transitions;
 VkDeviceSize offset = 0;
 VkDeviceSize data_size;
 VkDeviceSize index_data_size;
@@ -194,8 +197,8 @@ bool creatingcmdforstaging()
                                                                 cmdpoolforstaging,
                                                                 VK_COMMAND_BUFFER_LEVEL_PRIMARY,
                                                                 count};
-    cmdbuffers = malloc(count * sizeof(VkCommandBuffer));
-    resultb = vkAllocateCommandBuffers(logical_device, &command_buffer_allocate_info, cmdbuffers);
+    cmdbuffers.resize(count);
+    resultb = vkAllocateCommandBuffers(logical_device, &command_buffer_allocate_info, cmdbuffers.data());
     if (VK_SUCCESS != resultb)
     {
         printf("couldn't create command buffer\n");
@@ -221,7 +224,7 @@ bool creatingcmdforstaging()
 // and obviously i will choose 2 option i dont want to harm  my rotating rectangle
 VkCommandBuffer beginsingletimecommands() // yeah this called by functions which will be called from the functions which will be called in main
 {
-    VkCommandBufferAllocateInfo allocInfo = {0};
+    VkCommandBufferAllocateInfo allocInfo{};
     allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
     allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
     allocInfo.commandPool = cmdpoolforstaging;
@@ -230,7 +233,7 @@ VkCommandBuffer beginsingletimecommands() // yeah this called by functions which
     VkCommandBuffer commandBuffer; // this is the buffer which is main it does things
     vkAllocateCommandBuffers(logical_device, &allocInfo, &commandBuffer);
 
-    VkCommandBufferBeginInfo beginInfo = {0};
+    VkCommandBufferBeginInfo beginInfo{};
     beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
     beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
 
@@ -242,7 +245,7 @@ VkCommandBuffer beginsingletimecommands() // yeah this called by functions which
 void endsingletimecommands(VkCommandBuffer commandBuffer) // see this is taking the input command buffer which is brgin in above function
 {                                                         // this is submitting function as there are no need of seemaphores this that it fairly simple    vkEndCommandBuffer(commandBuffer);
 
-    VkSubmitInfo submitInfo = {0};
+    VkSubmitInfo submitInfo{};
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
     submitInfo.commandBufferCount = 1;
     submitInfo.pCommandBuffers = &commandBuffer;
@@ -257,7 +260,7 @@ void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) // i 
 {                                                                          // dont worry i will explain
     VkCommandBuffer commandBuffer = beginsingletimecommands();             // so see when we call this function this function return is cmd buffer so the variable takes it
 
-    VkBufferCopy image_copyregion = {0};
+    VkBufferCopy image_copyregion{};
     image_copyregion.size = size;
     vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &image_copyregion);
 
@@ -270,7 +273,7 @@ void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) // i 
 void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout) // this will be called
 {
     VkCommandBuffer commandBuffer = beginsingletimecommands();
-    VkImageMemoryBarrier barrier = {0};
+    VkImageMemoryBarrier barrier{};
     barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
     barrier.oldLayout = oldLayout;
     barrier.newLayout = newLayout;
@@ -319,7 +322,7 @@ void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayo
 void copyBufferToImage(VkBuffer buffer, VkImage image, uint32_t width, uint32_t height) // this will be called
 {
     VkCommandBuffer commandBuffer = beginsingletimecommands();
-    VkBufferImageCopy region = {0};
+    VkBufferImageCopy region{};
     region.bufferOffset = 0;
     region.bufferRowLength = 0;
     region.bufferImageHeight = 0;
@@ -478,9 +481,9 @@ bool creatingbuffer()
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // now i think i am supposed to create buffer for uniform also less goooooooooo
     /// first resize
-    uniform_buffers = malloc(sizeof(VkBuffer) * images_count);
-    memory_object_for_uniform = malloc(sizeof(VkDeviceMemory) * images_count);
-    ubomapped = malloc(sizeof(void *) * images_count);
+    uniform_buffers.resize(images_count);
+    memory_object_for_uniform.resize(images_count);
+    ubomapped.resize(images_count);
     //-----------------forloop----------------------------------//
     for (size_t i = 0; i < images_count; i++)
     {
@@ -647,7 +650,7 @@ void generateMipmaps(VkImage image, VkFormat imageformat, int32_t texWidth, int3
 bool createmsaa() // this is responsible for creation of msaa in application like this is given to the background kinda so the multi sampling is used there
 {
     VkFormat colorFormat = image_format; // this image format i took from swapchain creation
-    VkImageCreateInfo sampleinfo = {0};
+    VkImageCreateInfo sampleinfo{};
     sampleinfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     sampleinfo.pNext = NULL;
     sampleinfo.imageType = VK_IMAGE_TYPE_2D;
@@ -685,7 +688,7 @@ bool createmsaa() // this is responsible for creation of msaa in application lik
         }
     }
     vkBindImageMemory(logical_device, sampleimage, memory_object_for_msaa, 0);
-    VkImageViewCreateInfo msaaviewInfo = {0};
+    VkImageViewCreateInfo msaaviewInfo{};
     msaaviewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
     msaaviewInfo.image = sampleimage;              // in vulkan tutorials its color image dont be confused my future self
     msaaviewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D; // view 2d
@@ -699,12 +702,13 @@ bool createmsaa() // this is responsible for creation of msaa in application lik
     {
         printf("failed to create texture image view!\n");
     }
+    return true;
 }
 bool depthimage()
 {
     printf("your depth format is %d\n", (int)findDepthFormat());
     VkFormat depthFormat = findDepthFormat();
-    VkImageCreateInfo depthinfo = {0};
+    VkImageCreateInfo depthinfo{};
     depthinfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     depthinfo.pNext = NULL;
     depthinfo.imageType = VK_IMAGE_TYPE_2D;
@@ -742,7 +746,7 @@ bool depthimage()
         }
     }
     vkBindImageMemory(logical_device, depth_image, memory_object_for_depth_image, 0);
-    VkImageViewCreateInfo dviewInfo = {0};
+    VkImageViewCreateInfo dviewInfo{};
     dviewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
     dviewInfo.image = depth_image;
     dviewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D; // view 2d
@@ -756,6 +760,7 @@ bool depthimage()
     {
         printf("failed to create texture image view!\n");
     }
+    return true;
 }
 
 bool createtextureimage()
@@ -772,7 +777,7 @@ bool createtextureimage()
     // just saying there are rgba four componenets in one pixel so total * 4 our imafge size is declared above na so it will fill the vkdevice whenever we call this function
 
     VkBufferUsageFlags image_usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-    VkBufferCreateInfo image_buffer_create_info_for_image_staging = {0};
+    VkBufferCreateInfo image_buffer_create_info_for_image_staging{};
     image_buffer_create_info_for_image_staging.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
     image_buffer_create_info_for_image_staging.pNext = NULL,
     image_buffer_create_info_for_image_staging.flags = 0,
@@ -806,7 +811,7 @@ bool createtextureimage()
     memcpy(image_data, pixels, imagesize);                                                      // copy the pixels data in pointer image_data specified address and just specify the size of data now with this staging image memory is populated
     vkUnmapMemory(logical_device, memory_object_for_image_staging);                             // no use na so unma                                                // free now like i got data in my specified place na
     // now the setup for the destibnation to hold the data
-    VkImageCreateInfo imageInfo = {0};
+    VkImageCreateInfo imageInfo{};
     imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     imageInfo.imageType = VK_IMAGE_TYPE_2D;
     imageInfo.extent.width = texWidth;
@@ -859,7 +864,7 @@ bool createdestinationimageview()
 {
     // image view are wrappers on vkimage which tells the gpu how to access and interpret the data
     // sampler are used to say how gpu reads data during rendering
-    VkImageViewCreateInfo viewInfo = {0};
+    VkImageViewCreateInfo viewInfo{};
     viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
     viewInfo.image = image_destination_buffer;
     viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D; // view 2d
@@ -873,10 +878,11 @@ bool createdestinationimageview()
     {
         printf("failed to create texture image view!\n");
     }
+    return true;
 }
 bool createdestinationimagesampler()
 {
-    VkSamplerCreateInfo samplerInfo = {0};
+    VkSamplerCreateInfo samplerInfo{};
     samplerInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
     samplerInfo.magFilter = VK_FILTER_LINEAR;
     samplerInfo.minFilter = VK_FILTER_LINEAR;
@@ -897,6 +903,7 @@ bool createdestinationimagesampler()
     {
         printf("failed to create texture sampler!\n");
     }
+    return true;
 }
 bool allocatingandbindingmemory()
 {
@@ -1051,7 +1058,7 @@ bool stagingresources() // i will just call it vertex buffer
         return false;
     }
     memcpy(local_pointer, vertices, data_size); // its saying like copy data like vertex then copy them in local_pointers pointing address
-    memory_ranges = malloc(sizeof(VkMappedMemoryRange));
+    memory_ranges.resize(1);//----------------------------------------------sus------------------------------------
     memory_ranges[0] = (VkMappedMemoryRange){
         VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE,
         NULL,
@@ -1077,7 +1084,7 @@ bool stagingresources() // i will just call it vertex buffer
         return false;
     }
     memcpy(local_pointer, indices, index_data_size);
-    memory_ranges_for_index = malloc(sizeof(VkMappedMemoryRange));
+    memory_ranges_for_index.resize(1);
     memory_ranges_for_index[0] = (VkMappedMemoryRange){
         VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE,
         NULL,
@@ -1100,11 +1107,11 @@ bool copyingvertexbuffer()
 {
     // FROM HERE COPY INSTRUCTION CAN BE CALLED IN CMDBUFFER.CPP
     // here should be thw membarrier
-    buffer_transitions = malloc(sizeof(BufferTransition) * (1) + 1);
+    
+  buffer_transitions.resize(1+1);//////////////////////////////////////////////////////////sus1///////////////////////////////
     buffer_transitions[0] = (BufferTransition){staging_dst_buffer, VK_ACCESS_TRANSFER_WRITE_BIT, VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT, VK_QUEUE_FAMILY_IGNORED, VK_QUEUE_FAMILY_IGNORED}; // it is important to use () cause like in cpp we can ignore type but in c type cant be ignored
     // wait untill transfering is done then do change access to vertex read
-    buffer_memory_barriers = malloc(sizeof(VkBufferMemoryBarrier) * 1);
-
+    buffer_memory_barriers.resize(1);
     for (uint32_t i = 0; i < 1; i++)
     {
         buffer_memory_barriers[i] = (VkBufferMemoryBarrier){
@@ -1131,22 +1138,25 @@ bool updatingubo() // this will get rewrite everyframe like its in loop so this 
 
     // now time to move struct values
     ubox ubo = {};
-    mat4 trans = GLM_MAT4_IDENTITY_INIT;
-    glm_rotate(trans, elapsedSeconds * glm_rad(90.0f), (vec3){0.01f, 0.01f, 0.01f});
-    glm_scale(trans, (vec3){0.1f, 0.1f, 0.1f});
-    glm_mat4_copy(trans, ubo.model);
-    vec3 eye = {2.0f, 2.0f, 10.0f};
-    vec3 cam = {0.0f, 0.0f, -1.0f};
-    vec3 up = {0.0f, 0.0f, 1.0f};
-    glm_lookat(eye, cam, up, trans);
-    glm_mat4_copy(trans, ubo.view);
-    float fov = glm_rad(60.0f);                                         // Field of view in radians
-    float aspect = (float)size_of_images.width / size_of_images.height; // Aspect ratio (width / height)
-    float nearZ = 0.1f;                                                 // Near clipping plane
-    float farZ = 100.0f;                                                // Far clipping plane
+    // Model matrix
+glm::mat4 trans(1.0f);
+trans = glm::rotate(trans, elapsedSeconds * glm::radians(90.0f), glm::vec3(0.01f, 0.01f, 0.01f));
+trans = glm::scale(trans, glm::vec3(0.1f, 0.1f, 0.1f));
+ubo.model = trans;
 
-    glm_perspective(fov, aspect, nearZ, farZ, trans);
-    glm_mat4_copy(trans, ubo.proj);
+// View matrix
+glm::vec3 eye(2.0f, 2.0f, 10.0f);
+glm::vec3 cam(0.0f, 0.0f, -1.0f);
+glm::vec3 up(0.0f, 0.0f, 1.0f);
+ubo.view = glm::lookAt(eye, cam, up);
+
+// Projection matrix
+float fov = glm::radians(60.0f);
+float aspect = static_cast<float>(size_of_images.width) / size_of_images.height;
+float nearZ = 0.1f;
+float farZ = 100.0f;
+
+ubo.proj = glm::perspective(fov, aspect, nearZ, farZ);
     ubo.proj[1][1] *= -1;
     memcpy(ubomapped[image_index], &ubo, sizeof(ubo));
     return true;
@@ -1215,13 +1225,15 @@ bool updatingubo() // this will get rewrite everyframe like its in loop so this 
 }*/
 bool bufferbinding() // like to specify from where to take vertex data
 {
-    binding_descriptions = malloc(sizeof(VkVertexInputBindingDescription) * 1);
-    binding_descriptions->binding = 0;
-    binding_descriptions->inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-    binding_descriptions->stride = sizeof(Vertex);
-    attribute_descriptions = (VkVertexInputAttributeDescription *)malloc(sizeof(VkVertexInputAttributeDescription) * 3);
-    memset(attribute_descriptions, 0, sizeof(VkVertexInputAttributeDescription) * 2);
+  binding_descriptions.resize(1);  
+    binding_descriptions[0].binding = 0;
+    binding_descriptions[0].inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+    binding_descriptions[0].stride = sizeof(Vertex);
+    attribute_descriptions.resize(3);
     /// this is for vertex data
+    std::fill(attribute_descriptions.begin(),
+          attribute_descriptions.end(),
+          VkVertexInputAttributeDescription{});//just zero initializing
     attribute_descriptions[0].binding = 0;
     attribute_descriptions[0].location = 0;
     attribute_descriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
@@ -1239,27 +1251,5 @@ bool bufferbinding() // like to specify from where to take vertex data
 
     /// i will bind vertex in pipeline.cpp cause my all bindings are from there
     return true;
-}
-void buffer_cleanup()
-{
-    vkFreeCommandBuffers(logical_device, cmdpoolforstaging, 1, &cmdbufferforstaging);
-    vkDestroyCommandPool(logical_device, cmdpoolforstaging, NULL);
-    vkDestroyBuffer(logical_device, staging_buffer, NULL);
-    vkDestroyBuffer(logical_device, staging_dst_buffer, NULL);
-    vkFreeMemory(logical_device, memory_object_for_staging, NULL);
-    vkFreeMemory(logical_device, memory_object_for_dst_staging, NULL);
-    vkDestroyImage(logical_device, image_destination_buffer, NULL);
-    vkFreeMemory(logical_device, memory_object_for_image_destination, NULL);
-    vkDestroyImageView(logical_device, image_destination_view, NULL);
-    vkDestroySampler(logical_device, image_destination_sampler, NULL);
-    vkDestroyImageView(logical_device,sampleimageview, NULL);
-    vkDestroyImage(logical_device, sampleimage, NULL);
-    vkFreeMemory(logical_device, memory_object_for_msaa, NULL);
 
-    free(cmdbuffers);
-    free(memory_ranges);
-    free(buffer_transitions);
-    free(buffer_memory_barriers);
-    free(binding_descriptions);
-    free(attribute_descriptions);
 }

@@ -1,5 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <vector>
+//HIIIIII MY FUTURE SELF THIS IS THE POINT WHERE THIS FILE WILL BE WORKING 
 #include <vulkan/vulkan.h>
 #include "instance.h"
 #include "device.h"
@@ -17,20 +18,20 @@ VkExtent2D size_of_images;
 VkSurfaceTransformFlagBitsKHR surface_transform;
 VkFormat image_format = VK_FORMAT_R8G8B8A8_SRGB;
 VkColorSpaceKHR image_color_space = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
-VkSurfaceFormatKHR* surface_formats = NULL;
+std :: vector <VkSurfaceFormatKHR> surface_formats;
 VkSwapchainKHR swapchain;
 VkSemaphore imageavailablesemaphore;//signaled in vkacquirenext
 VkFence inflightfence;//so this waits indefinetly full untill the queue submission
 VkQueue present_queue;
 uint32_t present_queue_index;
-VkImage* swapchain_images = NULL;//we are using vector for swapchain images because we can resize it later on
+std::vector<VkImage>swapchain_images;
 uint32_t image_index;
-VkImageView* swapchain_image_views = NULL;//we are using vector for swapchain image views because we can resize it later on
-VkPresentModeKHR* present_modes = NULL;
-VkFence* inflightfences = NULL;
-VkSwapchainKHR* swapchains = NULL;
-VkSemaphore* waitsignalsemaphores = NULL;
-uint32_t* image_indices = NULL;
+std::vector <VkImageView> swapchain_image_views;//we are using vector for swapchain image views because we can resize it later on
+std :: vector <VkPresentModeKHR> present_modes;
+std :: vector <VkFence> inflightfences ;
+std :: vector <VkSwapchainKHR> swapchains;
+std :: vector <VkSemaphore> waitsignalsemaphores;
+std :: vector <uint32_t> image_indices ;
 GLFWwindow* window;
 uint32_t images_count = 0;
 bool presentingsurface()
@@ -84,8 +85,8 @@ bool selectingdesiredpresentationmode()
         printf("cant get present modes count\n");
         return false;
     }
-    present_modes = malloc(present_modes_count * sizeof(VkPresentModeKHR));
-    resultp = vkGetPhysicalDeviceSurfacePresentModesKHR(physical_device, presentation_surface, &present_modes_count, present_modes);
+    present_modes.resize(sizeof(VkPresentModeKHR));
+    resultp = vkGetPhysicalDeviceSurfacePresentModesKHR(physical_device, presentation_surface, &present_modes_count, present_modes.data());
     if ((resultp != VK_SUCCESS) || (present_modes_count == 0))
     {
         printf("cant get present modes storage\n");
@@ -195,7 +196,7 @@ bool formatofswapchainimages()
         printf("error no formats are there\n");
         return false;
     }
-    surface_formats = malloc(sizeof(VkSurfaceFormatKHR)*formats_count);
+    surface_formats.resize(sizeof(VkSurfaceFormatKHR)*formats_count);
     resultp = vkGetPhysicalDeviceSurfaceFormatsKHR(physical_device, presentation_surface, &formats_count, &surface_formats[0]);
     if ((resultp != VK_SUCCESS) || (formats_count == 0))
     {
@@ -280,7 +281,7 @@ bool gettinghandlesofswapchain() // safe all from her
         printf("cant get swapchain images count\n");
         return false;
     } // dont look confused i made swapchain_images global vector idk why
-    swapchain_images = malloc(sizeof(VkImage)*images_count);// we are making space for swapchain images based on count of images
+    swapchain_images.resize(sizeof(VkImage)*images_count);
     resultp = vkGetSwapchainImagesKHR(logical_device, swapchain, &images_count, &swapchain_images[0]); // like now we are getting handles of swapchain image
     if ((resultp != VK_SUCCESS) || (images_count == 0))
     {
@@ -291,7 +292,7 @@ bool gettinghandlesofswapchain() // safe all from her
 }
 bool creatingswapchainimageviews() {
 
-    swapchain_image_views = malloc(sizeof(VkImageView)*images_count);
+  swapchain_image_views.resize(sizeof(VkImageView)*images_count);
     for (size_t i = 0; i < images_count; i++) {
         VkImageViewCreateInfo image_create_info = {};
         image_create_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
@@ -355,7 +356,7 @@ bool acquiringswapchainimages()
 {
     // dont look confused semaphore fence and image index i made them global variables so others can use it
     //in loop i am supposed to do alll these but wait untill the rendering is done like this
-    inflightfences = malloc(sizeof(VkFence)*1);
+inflightfences.resize(1);
     inflightfences[0] = inflightfence;
     vkWaitForFences(logical_device, 1, &inflightfences[0], VK_TRUE, UINT64_MAX);
     vkDeviceWaitIdle(logical_device);
@@ -374,11 +375,12 @@ bool acquiringswapchainimages()
 }
 bool presentinganimage()
 {
-    swapchains = malloc(sizeof(VkSwapchainKHR)*1);
+swapchains.resize(sizeof(VkSwapchainKHR)*1);
+    
     swapchains[0] = swapchain;
-    waitsignalsemaphores = malloc(sizeof(VkSemaphore)*1);
+    waitsignalsemaphores.resize(sizeof(VkSemaphore)*1);
     waitsignalsemaphores[0] = renderfinishedsemaphore;//i will wait for render finished semaphore tho which i will get from vkqueuesubmit i guess
-    image_indices = malloc(sizeof(uint32_t)*1);
+    image_indices.resize(sizeof(uint32_t)*1);
     image_indices[0] = image_index;
     VkPresentInfoKHR present_info = {
         VK_STRUCTURE_TYPE_PRESENT_INFO_KHR,
@@ -399,20 +401,4 @@ bool presentinganimage()
         return false;
     }
     
-}
-void present_cleanup()
-{
-    free(swapchain_images);
-    free(swapchain_image_views);
-    free(present_modes);
-    free(inflightfences);
-    free(swapchains);
-    free(waitsignalsemaphores);
-    free(image_indices);
-    free(surface_formats);
-    vkDestroySemaphore(logical_device, imageavailablesemaphore, NULL);
-    vkDestroySemaphore(logical_device, renderfinishedsemaphore, NULL);
-    vkDestroyFence(logical_device, inflightfence, NULL);
-    vkDestroySwapchainKHR(logical_device, swapchain, NULL);
-    vkDestroySurfaceKHR(instance, presentation_surface, NULL);
 }

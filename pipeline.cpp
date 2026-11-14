@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <cstdint>
 #include <stdbool.h>
 #include <vulkan/vulkan.h>
 #include "device.h"
@@ -17,80 +17,81 @@ typedef struct
 	char const *entrypointname;
 	VkSpecializationInfo const *specializationinfo;
 } ShaderStageParameters;
-VkPipelineShaderStageCreateInfo *shader_stage_create_infos = NULL;
-ShaderStageParameters *shader_stage_params = NULL;
-VkPipelineVertexInputStateCreateInfo vertex_input_state_create_info = {};
-VkPipelineInputAssemblyStateCreateInfo input_assembly_state_create_info = {};
-VkPipelineViewportStateCreateInfo viewport_state_create_info = {};
-VkPipelineRasterizationStateCreateInfo rasterization_state_create_info = {};
-VkPipelineMultisampleStateCreateInfo multisample_state_create_info = {};
-VkPipelineColorBlendStateCreateInfo color_blend_state_create_info = {};
+std :: vector <VkPipelineShaderStageCreateInfo> shader_stage_create_infos; 
+std :: vector < ShaderStageParameters > shader_stage_params;
+VkPipelineVertexInputStateCreateInfo vertex_input_state_create_info  {};
+VkPipelineInputAssemblyStateCreateInfo input_assembly_state_create_info  {};
+VkPipelineViewportStateCreateInfo viewport_state_create_info  {};
+VkPipelineRasterizationStateCreateInfo rasterization_state_create_info  {};
+VkPipelineMultisampleStateCreateInfo multisample_state_create_info  {};
+VkPipelineColorBlendStateCreateInfo color_blend_state_create_info {};
 VkPipeline pipe;
 VkPipelineLayout pipe_layout;
-VkViewport viewports = {};
-VkRect2D scissor = {};
+VkViewport viewports  {};
+VkRect2D scissor  {};
 VkPipelineColorBlendAttachmentState
 	color_blend_attach;
-uint32_t *readSPIRV(const char *filename, size_t *out_size)
+
+bool readSPIRV(const char *filename, std::vector<uint32_t>& bufferfile)
 {
-	FILE *file = fopen(filename, "rb");
-	if (!file)
-	{
-		printf("Failed to open SPIR-V file: %s\n", filename);
-		return NULL;
-	}
-	fseek(file, 0, SEEK_END);
-	size_t fileSize = ftell(file); // size of the whole file
-	rewind(file);				   // idk wtf
-	uint32_t *bufferfile = malloc(fileSize);
-	if (!bufferfile)
-	{
-		printf("Failed to allocate memory for SPIR-V file: %s\n", filename);
-		fclose(file);
-		return NULL;
-	}
-	fread(bufferfile, 1, fileSize, file); // read that file and store it in buffer
-	fclose(file);
-	// free(bufferfile);//i think i cant do this
-	*out_size = fileSize;
-	return bufferfile;
+    FILE *file = fopen(filename, "rb");
+    if (!file)
+        return false;
+
+    fseek(file, 0, SEEK_END);
+    size_t fileSize = ftell(file);
+    rewind(file);
+
+    bufferfile.resize(fileSize / sizeof(uint32_t));
+
+    size_t words_read = fread(
+        bufferfile.data(),
+        sizeof(uint32_t),
+        bufferfile.size(),
+        file
+    );
+
+    if (words_read != bufferfile.size())
+    {
+        fclose(file);
+        return false;
+    }
+
+    fclose(file);
+    return true;
 }
 bool creatingshadermodule() // like this is the storage of shader means spirv is stored here and from here we can send it to pipeline
 {
 	size_t vertex_code_size;
 	size_t fragment_code_size;
 	// std::vector <unsigned char> vertex_source_code = readSPIRV("vertx2.spv");//i dont think i need a array cause i have only one vert
-	uint32_t *vertex_source_code = readSPIRV("vertexxx.spv", &vertex_code_size); // i have not created anything though wait
-	if (!vertex_source_code)
-	{
-		printf("failed to load vertex shader\n");
-		return false;
-	}
-
+	// i have not created anything though wait
+  std :: vector <uint32_t> vertex_source_code;
+if (!readSPIRV("vertexxx.spv", vertex_source_code)) {
+    return false;
+}
 	VkShaderModuleCreateInfo vertex_shader_module_create_info = {};
 	vertex_shader_module_create_info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 	vertex_shader_module_create_info.pNext = NULL;
 	vertex_shader_module_create_info.flags = 0;
-	vertex_shader_module_create_info.codeSize = vertex_code_size;
-	vertex_shader_module_create_info.pCode = vertex_source_code;
+	vertex_shader_module_create_info.codeSize = vertex_source_code.size()*sizeof(uint32_t);
+	vertex_shader_module_create_info.pCode = vertex_source_code.data();
 	resultpipe = vkCreateShaderModule(logical_device, &vertex_shader_module_create_info, NULL, &vertex_shader_module);
 	if (VK_SUCCESS != resultpipe)
 	{
 		printf("couldnt create shader module\n");
 		return false;
 	}
-	uint32_t *fragment_source_code = readSPIRV("fragxxx.spv", &fragment_code_size);
-	if (!fragment_source_code)
-	{
-		printf("failed to load frag shader\n");
-		return false;
-	}
+  std :: vector <uint32_t> fragment_source_code;
+if (!readSPIRV("fragxxx.spv", fragment_source_code)) {
+    return false;
+}
 	VkShaderModuleCreateInfo fragment_shader_module_create_info = {};
 	fragment_shader_module_create_info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 	fragment_shader_module_create_info.pNext = NULL;
 	fragment_shader_module_create_info.flags = 0;
-	fragment_shader_module_create_info.codeSize = fragment_code_size;
-	fragment_shader_module_create_info.pCode = fragment_source_code;
+	fragment_shader_module_create_info.codeSize = fragment_source_code.size()*sizeof(uint32_t);
+	fragment_shader_module_create_info.pCode = fragment_source_code.data();
 	resultpipe = vkCreateShaderModule(logical_device, &fragment_shader_module_create_info, NULL, &fragment_shader_module);
 	if (VK_SUCCESS != resultpipe)
 	{
@@ -101,10 +102,10 @@ bool creatingshadermodule() // like this is the storage of shader means spirv is
 }
 bool specifyingpipelineshaderstages() // like in graphics shaders there are many shaders like vert frag blah blah so this to specify
 {
-	shader_stage_params = malloc(sizeof(ShaderStageParameters) * 2);
+	shader_stage_params.resize(2);
 	shader_stage_params[0] = (ShaderStageParameters){VK_SHADER_STAGE_VERTEX_BIT, vertex_shader_module, "main", NULL};
 	shader_stage_params[1] = (ShaderStageParameters){VK_SHADER_STAGE_FRAGMENT_BIT, fragment_shader_module, "main", NULL};
-	shader_stage_create_infos = malloc(sizeof(VkPipelineShaderStageCreateInfo) * 3);
+	shader_stage_create_infos.resize(3);
 	for (int i = 0; i < 2; i++)
 	{
 		shader_stage_create_infos[i] = (VkPipelineShaderStageCreateInfo){
@@ -236,12 +237,9 @@ bool pipelineblendstate()
 	printf("color blend state info filled.\n");
 	return true;
 }
-bool pipelinedepth()
-{
-}
 bool creatingpipeline()
 {
-	VkPipelineDepthStencilStateCreateInfo depthStencil = {0};
+	VkPipelineDepthStencilStateCreateInfo depthStencil {};
 	depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
 	depthStencil.depthTestEnable = VK_TRUE;
 	depthStencil.depthWriteEnable = VK_TRUE;
@@ -274,14 +272,14 @@ bool creatingpipeline()
 	// create pipeline
 	//
 	VkGraphicsPipelineCreateInfo
-		pipe_cre_info = {0};
+		pipe_cre_info {};
 	pipe_cre_info.sType =
 		VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
 	pipe_cre_info.pNext = NULL;
 	pipe_cre_info.flags = 0;
 	pipe_cre_info.stageCount = 2;
 	pipe_cre_info.pStages =
-		shader_stage_create_infos;
+		shader_stage_create_infos.data();
 	pipe_cre_info.pVertexInputState =
 		&vertex_input_state_create_info;
 	pipe_cre_info.pInputAssemblyState =
@@ -313,14 +311,4 @@ bool creatingpipeline()
 	}
 	//
 	return true;
-}
-void pipeline_cleanup()
-{
-	free(shader_stage_create_infos);
-	free(shader_stage_params);
-	vkDestroyPipeline(logical_device, pipe, NULL);
-	vkDestroyPipelineLayout(logical_device, pipe_layout, NULL);
-	vkDestroyShaderModule(logical_device, vertex_shader_module, NULL);
-	vkDestroyShaderModule(logical_device, fragment_shader_module, NULL);
-	vkDestroyDevice(logical_device, NULL);
 }

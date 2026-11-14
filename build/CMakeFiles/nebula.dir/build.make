@@ -72,178 +72,178 @@ include CMakeFiles/nebula.dir/flags.make
 CMakeFiles/nebula.dir/codegen:
 .PHONY : CMakeFiles/nebula.dir/codegen
 
-CMakeFiles/nebula.dir/instance.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/instance.c.o: /home/prashanth/Desktop/nebula/instance.c
-CMakeFiles/nebula.dir/instance.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/nebula.dir/instance.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/instance.c.o -MF CMakeFiles/nebula.dir/instance.c.o.d -o CMakeFiles/nebula.dir/instance.c.o -c /home/prashanth/Desktop/nebula/instance.c
+CMakeFiles/nebula.dir/instance.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/instance.cpp.o: /home/prashanth/Desktop/nebula/instance.cpp
+CMakeFiles/nebula.dir/instance.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/nebula.dir/instance.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/instance.cpp.o -MF CMakeFiles/nebula.dir/instance.cpp.o.d -o CMakeFiles/nebula.dir/instance.cpp.o -c /home/prashanth/Desktop/nebula/instance.cpp
 
-CMakeFiles/nebula.dir/instance.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/instance.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/instance.c > CMakeFiles/nebula.dir/instance.c.i
+CMakeFiles/nebula.dir/instance.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/instance.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/instance.cpp > CMakeFiles/nebula.dir/instance.cpp.i
 
-CMakeFiles/nebula.dir/instance.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/instance.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/instance.c -o CMakeFiles/nebula.dir/instance.c.s
+CMakeFiles/nebula.dir/instance.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/instance.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/instance.cpp -o CMakeFiles/nebula.dir/instance.cpp.s
 
-CMakeFiles/nebula.dir/device.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/device.c.o: /home/prashanth/Desktop/nebula/device.c
-CMakeFiles/nebula.dir/device.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/nebula.dir/device.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/device.c.o -MF CMakeFiles/nebula.dir/device.c.o.d -o CMakeFiles/nebula.dir/device.c.o -c /home/prashanth/Desktop/nebula/device.c
+CMakeFiles/nebula.dir/device.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/device.cpp.o: /home/prashanth/Desktop/nebula/device.cpp
+CMakeFiles/nebula.dir/device.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/nebula.dir/device.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/device.cpp.o -MF CMakeFiles/nebula.dir/device.cpp.o.d -o CMakeFiles/nebula.dir/device.cpp.o -c /home/prashanth/Desktop/nebula/device.cpp
 
-CMakeFiles/nebula.dir/device.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/device.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/device.c > CMakeFiles/nebula.dir/device.c.i
+CMakeFiles/nebula.dir/device.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/device.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/device.cpp > CMakeFiles/nebula.dir/device.cpp.i
 
-CMakeFiles/nebula.dir/device.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/device.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/device.c -o CMakeFiles/nebula.dir/device.c.s
+CMakeFiles/nebula.dir/device.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/device.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/device.cpp -o CMakeFiles/nebula.dir/device.cpp.s
 
-CMakeFiles/nebula.dir/present.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/present.c.o: /home/prashanth/Desktop/nebula/present.c
-CMakeFiles/nebula.dir/present.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/nebula.dir/present.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/present.c.o -MF CMakeFiles/nebula.dir/present.c.o.d -o CMakeFiles/nebula.dir/present.c.o -c /home/prashanth/Desktop/nebula/present.c
+CMakeFiles/nebula.dir/present.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/present.cpp.o: /home/prashanth/Desktop/nebula/present.cpp
+CMakeFiles/nebula.dir/present.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/nebula.dir/present.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/present.cpp.o -MF CMakeFiles/nebula.dir/present.cpp.o.d -o CMakeFiles/nebula.dir/present.cpp.o -c /home/prashanth/Desktop/nebula/present.cpp
 
-CMakeFiles/nebula.dir/present.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/present.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/present.c > CMakeFiles/nebula.dir/present.c.i
+CMakeFiles/nebula.dir/present.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/present.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/present.cpp > CMakeFiles/nebula.dir/present.cpp.i
 
-CMakeFiles/nebula.dir/present.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/present.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/present.c -o CMakeFiles/nebula.dir/present.c.s
+CMakeFiles/nebula.dir/present.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/present.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/present.cpp -o CMakeFiles/nebula.dir/present.cpp.s
 
-CMakeFiles/nebula.dir/buffer.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/buffer.c.o: /home/prashanth/Desktop/nebula/buffer.c
-CMakeFiles/nebula.dir/buffer.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/nebula.dir/buffer.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/buffer.c.o -MF CMakeFiles/nebula.dir/buffer.c.o.d -o CMakeFiles/nebula.dir/buffer.c.o -c /home/prashanth/Desktop/nebula/buffer.c
+CMakeFiles/nebula.dir/buffer.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/buffer.cpp.o: /home/prashanth/Desktop/nebula/buffer.cpp
+CMakeFiles/nebula.dir/buffer.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/nebula.dir/buffer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/buffer.cpp.o -MF CMakeFiles/nebula.dir/buffer.cpp.o.d -o CMakeFiles/nebula.dir/buffer.cpp.o -c /home/prashanth/Desktop/nebula/buffer.cpp
 
-CMakeFiles/nebula.dir/buffer.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/buffer.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/buffer.c > CMakeFiles/nebula.dir/buffer.c.i
+CMakeFiles/nebula.dir/buffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/buffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/buffer.cpp > CMakeFiles/nebula.dir/buffer.cpp.i
 
-CMakeFiles/nebula.dir/buffer.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/buffer.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/buffer.c -o CMakeFiles/nebula.dir/buffer.c.s
+CMakeFiles/nebula.dir/buffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/buffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/buffer.cpp -o CMakeFiles/nebula.dir/buffer.cpp.s
 
-CMakeFiles/nebula.dir/cmdbuffer.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/cmdbuffer.c.o: /home/prashanth/Desktop/nebula/cmdbuffer.c
-CMakeFiles/nebula.dir/cmdbuffer.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/nebula.dir/cmdbuffer.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/cmdbuffer.c.o -MF CMakeFiles/nebula.dir/cmdbuffer.c.o.d -o CMakeFiles/nebula.dir/cmdbuffer.c.o -c /home/prashanth/Desktop/nebula/cmdbuffer.c
+CMakeFiles/nebula.dir/cmdbuffer.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/cmdbuffer.cpp.o: /home/prashanth/Desktop/nebula/cmdbuffer.cpp
+CMakeFiles/nebula.dir/cmdbuffer.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/nebula.dir/cmdbuffer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/cmdbuffer.cpp.o -MF CMakeFiles/nebula.dir/cmdbuffer.cpp.o.d -o CMakeFiles/nebula.dir/cmdbuffer.cpp.o -c /home/prashanth/Desktop/nebula/cmdbuffer.cpp
 
-CMakeFiles/nebula.dir/cmdbuffer.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/cmdbuffer.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/cmdbuffer.c > CMakeFiles/nebula.dir/cmdbuffer.c.i
+CMakeFiles/nebula.dir/cmdbuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/cmdbuffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/cmdbuffer.cpp > CMakeFiles/nebula.dir/cmdbuffer.cpp.i
 
-CMakeFiles/nebula.dir/cmdbuffer.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/cmdbuffer.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/cmdbuffer.c -o CMakeFiles/nebula.dir/cmdbuffer.c.s
+CMakeFiles/nebula.dir/cmdbuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/cmdbuffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/cmdbuffer.cpp -o CMakeFiles/nebula.dir/cmdbuffer.cpp.s
 
-CMakeFiles/nebula.dir/renderpass.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/renderpass.c.o: /home/prashanth/Desktop/nebula/renderpass.c
-CMakeFiles/nebula.dir/renderpass.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/nebula.dir/renderpass.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/renderpass.c.o -MF CMakeFiles/nebula.dir/renderpass.c.o.d -o CMakeFiles/nebula.dir/renderpass.c.o -c /home/prashanth/Desktop/nebula/renderpass.c
+CMakeFiles/nebula.dir/renderpass.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/renderpass.cpp.o: /home/prashanth/Desktop/nebula/renderpass.cpp
+CMakeFiles/nebula.dir/renderpass.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/nebula.dir/renderpass.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/renderpass.cpp.o -MF CMakeFiles/nebula.dir/renderpass.cpp.o.d -o CMakeFiles/nebula.dir/renderpass.cpp.o -c /home/prashanth/Desktop/nebula/renderpass.cpp
 
-CMakeFiles/nebula.dir/renderpass.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/renderpass.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/renderpass.c > CMakeFiles/nebula.dir/renderpass.c.i
+CMakeFiles/nebula.dir/renderpass.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/renderpass.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/renderpass.cpp > CMakeFiles/nebula.dir/renderpass.cpp.i
 
-CMakeFiles/nebula.dir/renderpass.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/renderpass.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/renderpass.c -o CMakeFiles/nebula.dir/renderpass.c.s
+CMakeFiles/nebula.dir/renderpass.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/renderpass.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/renderpass.cpp -o CMakeFiles/nebula.dir/renderpass.cpp.s
 
-CMakeFiles/nebula.dir/pipeline.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/pipeline.c.o: /home/prashanth/Desktop/nebula/pipeline.c
-CMakeFiles/nebula.dir/pipeline.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/nebula.dir/pipeline.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/pipeline.c.o -MF CMakeFiles/nebula.dir/pipeline.c.o.d -o CMakeFiles/nebula.dir/pipeline.c.o -c /home/prashanth/Desktop/nebula/pipeline.c
+CMakeFiles/nebula.dir/pipeline.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/pipeline.cpp.o: /home/prashanth/Desktop/nebula/pipeline.cpp
+CMakeFiles/nebula.dir/pipeline.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/nebula.dir/pipeline.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/pipeline.cpp.o -MF CMakeFiles/nebula.dir/pipeline.cpp.o.d -o CMakeFiles/nebula.dir/pipeline.cpp.o -c /home/prashanth/Desktop/nebula/pipeline.cpp
 
-CMakeFiles/nebula.dir/pipeline.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/pipeline.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/pipeline.c > CMakeFiles/nebula.dir/pipeline.c.i
+CMakeFiles/nebula.dir/pipeline.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/pipeline.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/pipeline.cpp > CMakeFiles/nebula.dir/pipeline.cpp.i
 
-CMakeFiles/nebula.dir/pipeline.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/pipeline.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/pipeline.c -o CMakeFiles/nebula.dir/pipeline.c.s
+CMakeFiles/nebula.dir/pipeline.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/pipeline.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/pipeline.cpp -o CMakeFiles/nebula.dir/pipeline.cpp.s
 
-CMakeFiles/nebula.dir/descriptor.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/descriptor.c.o: /home/prashanth/Desktop/nebula/descriptor.c
-CMakeFiles/nebula.dir/descriptor.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/nebula.dir/descriptor.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/descriptor.c.o -MF CMakeFiles/nebula.dir/descriptor.c.o.d -o CMakeFiles/nebula.dir/descriptor.c.o -c /home/prashanth/Desktop/nebula/descriptor.c
+CMakeFiles/nebula.dir/descriptor.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/descriptor.cpp.o: /home/prashanth/Desktop/nebula/descriptor.cpp
+CMakeFiles/nebula.dir/descriptor.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/nebula.dir/descriptor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/descriptor.cpp.o -MF CMakeFiles/nebula.dir/descriptor.cpp.o.d -o CMakeFiles/nebula.dir/descriptor.cpp.o -c /home/prashanth/Desktop/nebula/descriptor.cpp
 
-CMakeFiles/nebula.dir/descriptor.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/descriptor.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/descriptor.c > CMakeFiles/nebula.dir/descriptor.c.i
+CMakeFiles/nebula.dir/descriptor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/descriptor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/descriptor.cpp > CMakeFiles/nebula.dir/descriptor.cpp.i
 
-CMakeFiles/nebula.dir/descriptor.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/descriptor.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/descriptor.c -o CMakeFiles/nebula.dir/descriptor.c.s
+CMakeFiles/nebula.dir/descriptor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/descriptor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/descriptor.cpp -o CMakeFiles/nebula.dir/descriptor.cpp.s
 
-CMakeFiles/nebula.dir/objloader.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/objloader.c.o: /home/prashanth/Desktop/nebula/objloader.c
-CMakeFiles/nebula.dir/objloader.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/nebula.dir/objloader.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/objloader.c.o -MF CMakeFiles/nebula.dir/objloader.c.o.d -o CMakeFiles/nebula.dir/objloader.c.o -c /home/prashanth/Desktop/nebula/objloader.c
+CMakeFiles/nebula.dir/objloader.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/objloader.cpp.o: /home/prashanth/Desktop/nebula/objloader.cpp
+CMakeFiles/nebula.dir/objloader.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/nebula.dir/objloader.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/objloader.cpp.o -MF CMakeFiles/nebula.dir/objloader.cpp.o.d -o CMakeFiles/nebula.dir/objloader.cpp.o -c /home/prashanth/Desktop/nebula/objloader.cpp
 
-CMakeFiles/nebula.dir/objloader.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/objloader.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/objloader.c > CMakeFiles/nebula.dir/objloader.c.i
+CMakeFiles/nebula.dir/objloader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/objloader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/objloader.cpp > CMakeFiles/nebula.dir/objloader.cpp.i
 
-CMakeFiles/nebula.dir/objloader.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/objloader.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/objloader.c -o CMakeFiles/nebula.dir/objloader.c.s
+CMakeFiles/nebula.dir/objloader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/objloader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/objloader.cpp -o CMakeFiles/nebula.dir/objloader.cpp.s
 
-CMakeFiles/nebula.dir/main.c.o: CMakeFiles/nebula.dir/flags.make
-CMakeFiles/nebula.dir/main.c.o: /home/prashanth/Desktop/nebula/main.c
-CMakeFiles/nebula.dir/main.c.o: CMakeFiles/nebula.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/nebula.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nebula.dir/main.c.o -MF CMakeFiles/nebula.dir/main.c.o.d -o CMakeFiles/nebula.dir/main.c.o -c /home/prashanth/Desktop/nebula/main.c
+CMakeFiles/nebula.dir/main.cpp.o: CMakeFiles/nebula.dir/flags.make
+CMakeFiles/nebula.dir/main.cpp.o: /home/prashanth/Desktop/nebula/main.cpp
+CMakeFiles/nebula.dir/main.cpp.o: CMakeFiles/nebula.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/nebula.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nebula.dir/main.cpp.o -MF CMakeFiles/nebula.dir/main.cpp.o.d -o CMakeFiles/nebula.dir/main.cpp.o -c /home/prashanth/Desktop/nebula/main.cpp
 
-CMakeFiles/nebula.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nebula.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/prashanth/Desktop/nebula/main.c > CMakeFiles/nebula.dir/main.c.i
+CMakeFiles/nebula.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nebula.dir/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/prashanth/Desktop/nebula/main.cpp > CMakeFiles/nebula.dir/main.cpp.i
 
-CMakeFiles/nebula.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nebula.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/prashanth/Desktop/nebula/main.c -o CMakeFiles/nebula.dir/main.c.s
+CMakeFiles/nebula.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nebula.dir/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/prashanth/Desktop/nebula/main.cpp -o CMakeFiles/nebula.dir/main.cpp.s
 
 # Object files for target nebula
 nebula_OBJECTS = \
-"CMakeFiles/nebula.dir/instance.c.o" \
-"CMakeFiles/nebula.dir/device.c.o" \
-"CMakeFiles/nebula.dir/present.c.o" \
-"CMakeFiles/nebula.dir/buffer.c.o" \
-"CMakeFiles/nebula.dir/cmdbuffer.c.o" \
-"CMakeFiles/nebula.dir/renderpass.c.o" \
-"CMakeFiles/nebula.dir/pipeline.c.o" \
-"CMakeFiles/nebula.dir/descriptor.c.o" \
-"CMakeFiles/nebula.dir/objloader.c.o" \
-"CMakeFiles/nebula.dir/main.c.o"
+"CMakeFiles/nebula.dir/instance.cpp.o" \
+"CMakeFiles/nebula.dir/device.cpp.o" \
+"CMakeFiles/nebula.dir/present.cpp.o" \
+"CMakeFiles/nebula.dir/buffer.cpp.o" \
+"CMakeFiles/nebula.dir/cmdbuffer.cpp.o" \
+"CMakeFiles/nebula.dir/renderpass.cpp.o" \
+"CMakeFiles/nebula.dir/pipeline.cpp.o" \
+"CMakeFiles/nebula.dir/descriptor.cpp.o" \
+"CMakeFiles/nebula.dir/objloader.cpp.o" \
+"CMakeFiles/nebula.dir/main.cpp.o"
 
 # External object files for target nebula
 nebula_EXTERNAL_OBJECTS =
 
-nebula: CMakeFiles/nebula.dir/instance.c.o
-nebula: CMakeFiles/nebula.dir/device.c.o
-nebula: CMakeFiles/nebula.dir/present.c.o
-nebula: CMakeFiles/nebula.dir/buffer.c.o
-nebula: CMakeFiles/nebula.dir/cmdbuffer.c.o
-nebula: CMakeFiles/nebula.dir/renderpass.c.o
-nebula: CMakeFiles/nebula.dir/pipeline.c.o
-nebula: CMakeFiles/nebula.dir/descriptor.c.o
-nebula: CMakeFiles/nebula.dir/objloader.c.o
-nebula: CMakeFiles/nebula.dir/main.c.o
+nebula: CMakeFiles/nebula.dir/instance.cpp.o
+nebula: CMakeFiles/nebula.dir/device.cpp.o
+nebula: CMakeFiles/nebula.dir/present.cpp.o
+nebula: CMakeFiles/nebula.dir/buffer.cpp.o
+nebula: CMakeFiles/nebula.dir/cmdbuffer.cpp.o
+nebula: CMakeFiles/nebula.dir/renderpass.cpp.o
+nebula: CMakeFiles/nebula.dir/pipeline.cpp.o
+nebula: CMakeFiles/nebula.dir/descriptor.cpp.o
+nebula: CMakeFiles/nebula.dir/objloader.cpp.o
+nebula: CMakeFiles/nebula.dir/main.cpp.o
 nebula: CMakeFiles/nebula.dir/build.make
 nebula: CMakeFiles/nebula.dir/compiler_depend.ts
 nebula: /usr/lib64/libvulkan.so
 nebula: /usr/lib64/libglfw.so.3.4
 nebula: CMakeFiles/nebula.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking C executable nebula"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/prashanth/Desktop/nebula/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable nebula"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/nebula.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

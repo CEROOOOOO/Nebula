@@ -1,5 +1,6 @@
 #pragma once
-#include <stdio.h>
+#include <iostream>
+#include <vector>
 #include <vulkan/vulkan.h>
 #include <stdbool.h>
 #include <GLFW/glfw3.h>
@@ -28,13 +29,13 @@ extern VkExtent2D size_of_images;
 extern VkSurfaceTransformFlagBitsKHR surface_transform;
 extern VkFormat image_format;
 extern VkColorSpaceKHR image_color_space;
-extern VkSurfaceFormatKHR* surface_formats;
+extern std::vector<VkSurfaceFormatKHR>surface_formats;
 extern VkSwapchainKHR swapchain;
 extern VkSemaphore imageavailablesemaphore;//signaled in vkacquirenext
 extern VkFence inflightfence;//so this waits indefinetly full untill the queue submission
 extern VkQueue present_queue;
-extern VkImage* swapchain_images;
+extern std::vector<VkImage> swapchain_images;
 extern GLFWwindow* window;
 extern uint32_t image_index;
-extern VkImageView* swapchain_image_views;
+extern std :: vector <VkImageView> swapchain_image_views;
 extern uint32_t images_count;

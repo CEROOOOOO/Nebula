@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include <iostream>
+#include <vector>
 #include <vulkan/vulkan.h>
 #include "instance.h"
 #include "buffer.h"
@@ -8,17 +7,17 @@
     {
         uint32_t FamilyIndex;
         float* Priorities;
-    }QueueInfo;
+    }QueueInfo;//like there are many queues graphics or compute
 
 VkPhysicalDeviceFeatures device_features;//NEVER FORGET TO REDECLARE IN CPP WHICH WILL USE EXTERN 
 VkPhysicalDeviceProperties device_properties;//THAT EXTERN JUST SAID THAT ITS PRESENT BUT NEVER DECLARED
-VkQueueFamilyProperties* queue_families = NULL;//FOR QUEUE FAMILIES WE ARE USING VECTOR SO THAT WE CAN RESIZE IT LATER ON
-VkPhysicalDevice* available_devices = NULL;
-VkExtensionProperties* available_extensions = NULL;
-QueueInfo* requested_queues = NULL;
+std :: vector <VkQueueFamilyProperties> queue_families;//FOR QUEUE FAMILIES WE ARE USING VECTOR SO THAT WE CAN RESIZE IT LATER ON like queue families because every work on gpu is going through queue there are many queues familiar grps make  a famiky 
+std :: vector <VkPhysicalDevice> available_devices;
+std :: vector <VkExtensionProperties> available_extensions;
+std :: vector <QueueInfo> requested_queues;
 uint32_t compute_queue_family_index;//IF YOU WANT TO USE THAT EXTERN SOMEWHERE ELSE THEN DECLARE THAT STRCUT OR VARIABLE THERE
 uint32_t graphics_queue_family_index;//IF DIDNT YOU GET SOME LKNK 2001
-VkDevice logical_device;
+VkDevice logical_device; // the main device kinda it is the one which is going to say task to gpu 
 uint32_t queue_index = 0;
 VkQueue graphics_queue;
 VkQueue compute_queue;
@@ -39,8 +38,8 @@ bool enumeratingavailablephysicaldevice()
     {
         return false;
     }
-    available_devices = malloc(sizeof(VkPhysicalDevice)*devices_count);
-    resultd = vkEnumeratePhysicalDevices(instance, &devices_count, &available_devices[0]);
+    available_devices.resize(devices_count);
+    resultd = vkEnumeratePhysicalDevices(instance, &devices_count, available_devices.data());
     if ((resultd != VK_SUCCESS) || (devices_count == 0))
     {
         printf("you didnt enumerate physical device yet ");
@@ -49,10 +48,10 @@ bool enumeratingavailablephysicaldevice()
     printf("physical device created\n");
     physical_device = available_devices[1];///////////////////nvidia aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa//HERE I AM ASSIGNINNG MY PHYSICAL DEVICE PHYSICAL DEVICE IS CREATED 
     printf("physical_device is %p\n", (void*)physical_device);
-    maxsamples = getMaxUsableSampleCount(); //this function will give max sample count sopported by my device 
+    maxsamples = getMaxUsableSampleCount(); //this function will give max sample count sopported by my device sample are dots inside a pixel more sampls more smooth image 
     printf("my max sample count is %d\n",maxsamples);
     uint32_t extension_count = 0;
-    resultd = vkEnumerateDeviceExtensionProperties(physical_device, NULL, &extension_count, NULL);//CHECKING THE EXTENSIONS IT WILL PROVID E
+    resultd = vkEnumerateDeviceExtensionProperties(physical_device, NULL, &extension_count, NULL);//CHECKING THE EXTENSIONS IT WILL PROVIDE extensions like khr swapchain 
     if ((resultd != VK_SUCCESS) || (extension_count == 0))
     {
         printf("couldnt get extension count");
@@ -62,15 +61,14 @@ bool enumeratingavailablephysicaldevice()
     {
         printf("extension count %u\n", extension_count);
     }
-    available_extensions = malloc(sizeof(VkExtensionProperties) * extension_count);
-    resultd = vkEnumerateDeviceExtensionProperties(physical_device, NULL, &extension_count, available_extensions);
+    available_extensions.resize(extension_count);
     if ((resultd != VK_SUCCESS) || (extension_count == 0))
     {
         printf("couldnt enumerate device extensions");
         return false;
     }
-    vkGetPhysicalDeviceFeatures(physical_device, &device_features);//LIKE FEATURES AND PROPERTIES
-    vkGetPhysicalDeviceProperties(physical_device, &device_properties);
+    vkGetPhysicalDeviceFeatures(physical_device, &device_features);//LIKE FEATURES AND PROPERTIES 
+    vkGetPhysicalDeviceProperties(physical_device, &device_properties);//hardare specs 
     printf("your device is %s\n", device_properties.deviceName);
     printf("your driver version is %u\n", device_properties.driverVersion)  ;
     if (!device_features.geometryShader)
@@ -92,8 +90,8 @@ bool enumeratingavailablephysicaldevice()
     {
         printf("queue families count %u\n", queue_families_count);
     }
-    queue_families = malloc(sizeof(VkQueueFamilyProperties) * queue_families_count);//RESIZE THE VECTOR TO FIT THE QUEUE FAMILIES COUNT
-    vkGetPhysicalDeviceQueueFamilyProperties(physical_device, &queue_families_count, queue_families);
+    queue_families.resize(queue_families_count);
+    vkGetPhysicalDeviceQueueFamilyProperties(physical_device, &queue_families_count, queue_families.data());
     if (queue_families_count == 0)
     {
         printf("cant get the queue families itself\n");
@@ -123,8 +121,8 @@ bool enumeratingavailablephysicaldevice()
 }
 bool loadinglogicaldevice()
 {
+  requested_queues.resize(2);
 
-    requested_queues = malloc(sizeof(QueueInfo)*2);//we are making space for 2 queue cause we want to use graphics and compute queue
     requested_queues[0] = (QueueInfo){graphics_queue_family_index, (float[]){1.0f}};
     if (graphics_queue_family_index != compute_queue_family_index)
     {
@@ -150,7 +148,7 @@ bool loadinglogicaldevice()
         &device_features
 
     };
-    resultd = vkCreateDevice(physical_device, &device_create_info, NULL, &logical_device);
+    resultd = vkCreateDevice(physical_device, &device_create_info, NULL, &logical_device);//so logical device is not the actual hardware it just acts as bridge so no all the properties i want are given and loaded in logical device i can use this device to get the queue
     if ((resultd != VK_SUCCESS) || (logical_device == VK_NULL_HANDLE))
     {
         printf("could not create logical device \n");
@@ -160,7 +158,7 @@ bool loadinglogicaldevice()
     printf("your logical device is %p\n", (void*)logical_device);
     return true;
 }
-bool gettingqueue()
+bool gettingqueue() // the driver will give me the queue 
 {
     vkGetDeviceQueue(logical_device, graphics_queue_family_index, queue_index, &graphics_queue);//so here i am getting graphics queue cause i am entering index of queue family which supported graophics
     vkGetDeviceQueue(logical_device, compute_queue_family_index, queue_index, &compute_queue);
@@ -176,13 +174,4 @@ bool destroyinglogicaldevice()
         logical_device = VK_NULL_HANDLE;
     }
     return true;
-}
-void device_cleanup()
-{
-    free(queue_families);
-    free(requested_queues);
-    free(available_devices);
-    free(available_extensions);
-    vkDestroyDevice(logical_device, NULL);
-    
 }
